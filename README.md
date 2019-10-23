@@ -1,1 +1,1 @@
-# Course-project-Spring5
+Repository for the final project for FMI Course Spring v5
