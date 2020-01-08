@@ -31,7 +31,8 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public User findByUsername(String username) {
         return repository.findByUsername(username).orElseThrow(() -> new NonexistingEntityException(
-                String.format("User with username='%s' does not exist.", username)
+                String.format("User with username='%s' does not exist.",
+                        username)
         ));
     }
 
@@ -50,7 +51,8 @@ public class UsersServiceImpl implements UsersService {
     public User delete(String id) {
         Optional<User> old = repository.findById(id);
         if (!old.isPresent()) {
-            throw new InvalidEntityException(String.format("User with id='%s' does not exist.", id));
+            throw new InvalidEntityException(String.format("User with id='%s'" +
+                    " does not exist.", id));
         }
         repository.deleteById(id);
         return old.get();
