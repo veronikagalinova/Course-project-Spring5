@@ -20,9 +20,8 @@ public class Ticket {
     private String endPoint;
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
-    private double duration;
-    private double price;
     private String company;
+    private String seat;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String userId;
 }
