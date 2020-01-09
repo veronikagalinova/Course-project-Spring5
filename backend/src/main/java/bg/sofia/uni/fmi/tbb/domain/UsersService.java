@@ -11,4 +11,5 @@ public interface UsersService {
     User insert(User user);
     User update(User user);
     User delete(String id);
+    long getSize();
 }

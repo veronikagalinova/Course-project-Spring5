@@ -3,14 +3,23 @@ package bg.sofia.uni.fmi.tbb.domain;
 import bg.sofia.uni.fmi.tbb.dao.UsersRepository;
 import bg.sofia.uni.fmi.tbb.exception.InvalidEntityException;
 import bg.sofia.uni.fmi.tbb.exception.NonexistingEntityException;
+import bg.sofia.uni.fmi.tbb.model.Role;
+
+import static bg.sofia.uni.fmi.tbb.model.Role.ROLE_TRAVELER;
+
 import bg.sofia.uni.fmi.tbb.model.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class UsersServiceImpl implements UsersService {
 
     @Autowired
@@ -38,7 +47,15 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public User insert(User user) {
-        // TO DO - roles, password encoding
+        if (user.getRoles() == null || user.getRoles().isEmpty()) {
+            user.setRoles(Arrays.asList(new Role(ROLE_TRAVELER)));
+        }
+        PasswordEncoder passwordEncoder =
+                PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setActive(true);
+        User created = repository.save(user);
+        log.debug(">>>Created new user: " + created);
         return repository.insert(user);
     }
 
@@ -56,5 +73,10 @@ public class UsersServiceImpl implements UsersService {
         }
         repository.deleteById(id);
         return old.get();
+    }
+
+    @Override
+    public long getSize() {
+        return repository.count();
     }
 }
