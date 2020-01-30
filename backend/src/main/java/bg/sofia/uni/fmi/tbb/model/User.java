@@ -1,6 +1,7 @@
 package bg.sofia.uni.fmi.tbb.model;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NonNull;
 import org.hibernate.validator.constraints.Length;
@@ -11,6 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -34,9 +36,8 @@ public class User implements UserDetails {
     @NonNull
     private String username;
 
-    @NotNull
-    @Length(min = 5, max = 30)
-    @NonNull
+    @Pattern(regexp = "((?=.*[a-z])(?=.*d)(?=.*[@#$%])(?=.*[A-Z]).{6,16})")
+    @JsonProperty(access = WRITE_ONLY)
     private String password;
 
     @NotNull
@@ -44,27 +45,27 @@ public class User implements UserDetails {
     @Length(min = 1, max = 30)
     private String firstName;
 
+    @NotNull
+    @NonNull
     @Length(min = 1, max = 30)
     private String lastName;
 
-    @NonNull
     private List<Role> roles = new ArrayList<>();
 
     private boolean active = true;
 
-
-    public User(@NotNull @Length(min = 3, max = 30) @NonNull String username,
-                @NotNull @Length(min = 5, max = 30) @NonNull String password,
-                @NotNull @NonNull @Length(min = 1, max = 30) String firstName,
-                @Length(min = 1, max = 30) String lastName,
-                @NonNull List<Role> roles, boolean active) {
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.roles = roles;
-        this.active = active;
-    }
+//    public User(@NotNull @Length(min = 3, max = 30) String username,
+//                @NotNull @Length(min = 4, max = 80) String password,
+//                @NotNull @Length(min = 1, max = 30) String fname,
+//                @NotNull @Length(min = 1, max = 30) String lname,
+//                List<Role> roles, boolean active) {
+//        this.username = username;
+//        this.password = password;
+//        this.firstName = fname;
+//        this.lastName = lname;
+//        this.roles = roles;
+//        this.active = active;
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -73,16 +74,6 @@ public class User implements UserDetails {
 
     private Collection<GrantedAuthority> getAuthoritiesForRoles(List<Role> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toSet());
-    }
-
-    @JsonProperty(access = WRITE_ONLY)
-    public String getPassword() {
-        return password;
-    }
-
-    @JsonProperty
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     @Override

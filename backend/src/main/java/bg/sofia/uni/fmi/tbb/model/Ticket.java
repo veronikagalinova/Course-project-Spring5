@@ -22,6 +22,5 @@ public class Ticket {
     private LocalDateTime arrivalTime;
     private String company;
     private String seat;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String userId;
 }

@@ -54,9 +54,9 @@ public class UsersServiceImpl implements UsersService {
                 PasswordEncoderFactories.createDelegatingPasswordEncoder();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(true);
-        User created = repository.save(user);
+        User created = repository.insert(user);
         log.debug(">>>Created new user: " + created);
-        return repository.insert(user);
+        return created;
     }
 
     @Override
