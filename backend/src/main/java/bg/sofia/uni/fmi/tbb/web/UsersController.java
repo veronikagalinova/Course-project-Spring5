@@ -1,12 +1,15 @@
 package bg.sofia.uni.fmi.tbb.web;
 
 import bg.sofia.uni.fmi.tbb.domain.UsersService;
+import bg.sofia.uni.fmi.tbb.metaannotations.IsAdmin;
 import bg.sofia.uni.fmi.tbb.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -27,7 +30,7 @@ public class UsersController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<User> createUser(@RequestBody @Valid User user) {
         User created = service.insert(user);
         URI location =
                 MvcUriComponentsBuilder.fromMethodName(UsersController.class,

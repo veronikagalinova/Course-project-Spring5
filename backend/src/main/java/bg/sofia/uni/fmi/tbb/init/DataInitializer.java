@@ -20,11 +20,11 @@ public class DataInitializer implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-//        if (usersService.getSize() == 0) {
-//            User user = new User("admin", "admin123&", "Admin", "Admin",
-//                    Arrays.asList(new Role("ROLE_ADMIN")), true);
-//            log.info(">>>Created root admin user: {}", user);
-//            usersService.insert(user);
-//        }
+        if (usersService.getSize() == 0) {
+            User user = new User(null, "admin", "admin123&", "Admin", "Admin",
+                   "ROLE_ADMIN", true);
+            log.info(">>>Created root admin user: {}", user);
+            usersService.insert(user);
+        }
     }
 }

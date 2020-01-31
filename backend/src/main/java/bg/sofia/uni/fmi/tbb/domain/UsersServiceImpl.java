@@ -3,18 +3,17 @@ package bg.sofia.uni.fmi.tbb.domain;
 import bg.sofia.uni.fmi.tbb.dao.UsersRepository;
 import bg.sofia.uni.fmi.tbb.exception.InvalidEntityException;
 import bg.sofia.uni.fmi.tbb.exception.NonexistingEntityException;
-import bg.sofia.uni.fmi.tbb.model.Role;
 
-import static bg.sofia.uni.fmi.tbb.model.Role.ROLE_TRAVELER;
-
+import bg.sofia.uni.fmi.tbb.metaannotations.IsAdmin;
 import bg.sofia.uni.fmi.tbb.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
-import java.util.Arrays;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,10 +21,13 @@ import java.util.Optional;
 @Slf4j
 public class UsersServiceImpl implements UsersService {
 
+    private static final String EXISTING_USER_ERROR_MSG = "User %s already exist!";
+
     @Autowired
     private UsersRepository repository;
 
     @Override
+    @IsAdmin
     public List<User> findAll() {
         return repository.findAll();
     }
@@ -46,10 +48,14 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public User insert(User user) {
-        if (user.getRoles() == null || user.getRoles().isEmpty()) {
-            user.setRoles(Arrays.asList(new Role(ROLE_TRAVELER)));
+    public User insert(@Valid User user) {
+        Optional<User> userInDb = repository.findByUsername(user.getUsername());
+        if (userInDb.isPresent()) {
+            throw new InvalidEntityException(
+                    String.format(EXISTING_USER_ERROR_MSG, user.getUsername()));
         }
+
+        setRoles(user);
         PasswordEncoder passwordEncoder =
                 PasswordEncoderFactories.createDelegatingPasswordEncoder();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -61,6 +67,7 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public User update(User user) {
+        setRoles(user);
         return repository.save(user);
     }
 
@@ -78,5 +85,11 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public long getSize() {
         return repository.count();
+    }
+
+    private void setRoles(User user) {
+        if (user.getRoles() == null || StringUtils.isEmpty(user.getRoles())) {
+            user.setRoles("ROLE_TRAVELER");
+        }
     }
 }

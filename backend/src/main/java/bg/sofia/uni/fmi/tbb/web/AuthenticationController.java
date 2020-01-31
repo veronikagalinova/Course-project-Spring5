@@ -34,7 +34,6 @@ public class AuthenticationController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
-        log.warn("+++++++++username" + authenticationRequest.getUsername());
         authenticate(authenticationRequest.getUsername(),
                 authenticationRequest.getPassword());
 
@@ -42,11 +41,6 @@ public class AuthenticationController {
         String token = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new JwtResponse(token));
 
-    }
-
-    @RequestMapping("/signup")
-    public User saveUser(@RequestBody User user){
-        return usersService.insert(user);
     }
 
     private void authenticate(String username, String password) throws Exception {
