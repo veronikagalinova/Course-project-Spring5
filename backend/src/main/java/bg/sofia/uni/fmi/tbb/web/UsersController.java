@@ -20,6 +20,7 @@ public class UsersController {
     private UsersService service;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<User> getUsers() {
         return service.findAll();
     }
