@@ -2,6 +2,7 @@ package bg.sofia.uni.fmi.tbb.web;
 
 import bg.sofia.uni.fmi.tbb.domain.UsersService;
 import bg.sofia.uni.fmi.tbb.metaannotations.IsAdmin;
+import bg.sofia.uni.fmi.tbb.metaannotations.IsCurrentUserOrAdmin;
 import bg.sofia.uni.fmi.tbb.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,12 +21,13 @@ public class UsersController {
     private UsersService service;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @IsAdmin
     public List<User> getUsers() {
         return service.findAll();
     }
 
     @GetMapping("{id}")
+    @IsCurrentUserOrAdmin
     public User findById(@PathVariable("id") String id) {
         return service.findById(id);
     }
@@ -40,6 +42,7 @@ public class UsersController {
     }
 
     @PutMapping("{id}")
+    @IsCurrentUserOrAdmin
     public ResponseEntity<User> updateUser(@PathVariable String id,
                                            @RequestBody User user) {
         User updated = service.update(user);
@@ -47,6 +50,7 @@ public class UsersController {
     }
 
     @DeleteMapping("{id}")
+    @IsCurrentUserOrAdmin
     public ResponseEntity<User> remove(@PathVariable String id) {
         return ResponseEntity.ok(service.delete(id));
     }

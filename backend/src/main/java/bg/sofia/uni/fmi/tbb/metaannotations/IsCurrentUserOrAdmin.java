@@ -1,6 +1,5 @@
 package bg.sofia.uni.fmi.tbb.metaannotations;
 
-
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.lang.annotation.ElementType;
@@ -10,6 +9,6 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-@PreAuthorize("hasAuthority('ADMIN')")
-public @interface IsAdmin {
+@PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
+public @interface IsCurrentUserOrAdmin {
 }

@@ -8,6 +8,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+
 
 @Slf4j
 @Component
@@ -19,7 +21,7 @@ public class DataInitializer implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         if (usersService.getSize() == 0) {
             User user = new User(null, "admin", "admin123&", "Admin", "Admin",
-                   "ROLE_ADMIN", true);
+                    Arrays.asList("ROLE_ADMIN"), true);
             log.info(">>>Created root admin user: {}", user);
             usersService.insert(user);
         }

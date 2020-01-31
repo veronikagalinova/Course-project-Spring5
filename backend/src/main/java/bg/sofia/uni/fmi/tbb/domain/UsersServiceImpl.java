@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -89,7 +90,7 @@ public class UsersServiceImpl implements UsersService {
 
     private void setRoles(User user) {
         if (user.getRoles() == null || StringUtils.isEmpty(user.getRoles())) {
-            user.setRoles("ROLE_TRAVELER");
+            user.setRoles(Arrays.asList("ROLE_TRAVELER"));
         }
     }
 }
