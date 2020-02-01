@@ -30,9 +30,9 @@ public class ExceptionHandlerControllerAdvice {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
-//    @ExceptionHandler
-//    public ResponseEntity<String> handle(AccessDeniedException ex){
-//        log.error(ex.getMessage());
-//        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ex.getMessage());
-//    }
+    @ExceptionHandler
+    public ResponseEntity<String> handle(AccessDeniedException ex){
+        log.error(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ex.getMessage());
+    }
 }

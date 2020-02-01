@@ -89,7 +89,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     private void setRoles(User user) {
-        if (user.getRoles() == null || StringUtils.isEmpty(user.getRoles())) {
+        if (user.getRoles() == null || user.getRoles().isEmpty()) {
             user.setRoles(Arrays.asList("ROLE_TRAVELER"));
         }
     }
