@@ -9,7 +9,26 @@
 - Gradle 6.0.1
 
 ## Functional summary:
-- in Wiki page
+Travel by bus (TBB) is online system for browsing and buying bus tickets. It supports different roles – Traveler, Bus Company and Admin. The system provides ability for travelers to search the best route, and for bus companies to manage their lines. In addition to that it allows users to register, and administrators to manage them.
+
+The system is developed using Spring 5 Application Development Framework. The frontend uses Angular 8 to make Single Page Application (SPA).  The backend is implemented as a REST/JSON API using JSON data serialization. Routing is done client-side. JWT is used for authorization.
+The main user roles are:
+* Traveler
+  * View all lines of bus company
+  * Search route by start point, end point and travel date
+(and optionally return date)
+  * Filter results by different criteria – duration, price, distance
+  * Buy and download ticket
+  * View list of all bought tickets
+* Administrator
+  * Manages users
+*	Bus Company 
+    * Create new bus lines with information for start point, end point, price, distance, duration, departure time, arrival time, number of seats
+    * Edit/Delete bus line
+    * View list of travelers for specified bus line
+* All users 
+  * Edit profile data – password, first name, last name
+
 
 ## Detailed description:
 - in Tbb presentation
