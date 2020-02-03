@@ -7,6 +7,7 @@ import bg.sofia.uni.fmi.tbb.model.BusLine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,7 +46,7 @@ public class BusLinesServiceImpl implements BusLinesService {
     }
 
     @Override
-    public BusLine insert(BusLine busLine) {
+    public BusLine insert(@Valid  BusLine busLine) {
         return repository.insert(busLine);
     }
 

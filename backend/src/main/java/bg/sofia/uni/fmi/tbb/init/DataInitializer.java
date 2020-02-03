@@ -25,5 +25,7 @@ public class DataInitializer implements ApplicationRunner {
             log.info(">>>Created root admin user: {}", user);
             usersService.insert(user);
         }
+
+
     }
 }
