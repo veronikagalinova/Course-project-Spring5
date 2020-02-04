@@ -16,6 +16,7 @@ export class HomeComponent {
         private authenticationService: AuthenticationService
     ) {
         this.currentUser = this.authenticationService.currentUserValue;
+        console.log(this.currentUser);
     }
 
     ngOnInit() {
