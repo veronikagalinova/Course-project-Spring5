@@ -1,11 +1,43 @@
 <mat-toolbar color="primary" class="app-header">
     <mat-toolbar-row>
-        <span>Travel By Bus</span>
+        <span>
+            <button mat-button routerLink="/">{{title}}</button>
+        </span>
         <span class="example-fill-remaining-space"></span>
         <span class="align-center"></span>
         <span class="spacer"></span>
-        <a mat-button routerLink="login" routerLinkActive="active">Login</a>
-        <a mat-button mat-raised-button routerLink="register" routerLinkActive="active">Register</a>
+        <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+            <button mat-button routerLink="/login" *ngIf="!isAuthenticated">
+              Login
+            </button>
+            <button mat-button routerLink="/register" *ngIf="!isAuthenticated">
+                Register
+              </button>
+            <button mat-button *ngIf="isAuthenticated" (click)="logout()">
+              Logout
+            </button>
+        </div>
+
+        <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+            <mat-icon>menu</mat-icon>
+        </button>
     </mat-toolbar-row>
 </mat-toolbar>
+
+<mat-menu x-position="before" #menu="matMenu">
+    <button mat-menu-item routerLink="/">
+      Home
+    </button>
+    <button mat-menu-item routerLink="/login" *ngIf="!isAuthenticated">
+      Login
+    </button>
+    <button mat-menu-item routerLink="/login" *ngIf="!isAuthenticated">
+        Register
+    </button>
+    <button mat-menu-item *ngIf="isAuthenticated" (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      Logout
+    </button>
+</mat-menu>
+
 <router-outlet></router-outlet>
