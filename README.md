@@ -4,6 +4,7 @@
 
 ## Technologies used:
 - Java 1.8, Spring Boot 2.2
+- jjwt 0.9.1
 - NodeJS v12.14.0, Angular 8
 - MongoDB 4.2
 - Gradle 6.0.1
