@@ -19,6 +19,7 @@ import {
   MatTooltipModule,
   MatTableModule,
   MatPaginatorModule,
+  MatProgressSpinnerModule,
   MatCardModule
 } from '@angular/material';
 
@@ -42,6 +43,7 @@ import {
     MatNativeDateModule,
     MatChipsModule,
     MatTooltipModule,
+    MatProgressSpinnerModule,
     MatTableModule,
     MatPaginatorModule
   ],
@@ -62,6 +64,7 @@ import {
     MatCardModule,
     MatTooltipModule,
     MatTableModule,
+    MatProgressSpinnerModule,
     MatPaginatorModule
   ],
   providers: [

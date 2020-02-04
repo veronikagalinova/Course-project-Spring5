@@ -15,4 +15,9 @@ export class UserService {
     getById(id: string) {
         return this.http.get<User>(`${environment.apiUrl}/api/users/${id}`);
     }
+
+    register(user: User) {
+        console.log(user)
+        return this.http.post<User>(`${environment.apiUrl}/api/users`, user);
+    }
 }
