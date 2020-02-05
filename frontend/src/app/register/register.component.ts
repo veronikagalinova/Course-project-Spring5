@@ -13,7 +13,7 @@ import { User } from '../_models/User';
 })
 export class RegisterComponent implements OnInit {
 
-  roles = [Role.Traveler, Role.BUS_COMPANY];
+  roles = [Role.TRAVELER, Role.BUS_COMPANY];
   registerForm: FormGroup;
   loading = false;
   submitted = false;

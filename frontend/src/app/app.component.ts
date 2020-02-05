@@ -13,6 +13,8 @@ export class AppComponent {
     title = "Travel By Bus";
     currentUser: User;
     isAuthenticated: boolean;
+    isBusCompany: boolean;
+    isTraveler: boolean;
 
     constructor(
         private router: Router,
@@ -21,13 +23,15 @@ export class AppComponent {
         this.authenticationService.currentUser.subscribe(x => {
             this.currentUser = x;
             this.isAuthenticated = this.currentUser != null;
-        });
+            this.isBusCompany = this.currentUser && this.currentUser.roles.includes(Role.BUS_COMPANY);
+            this.isTraveler = this.currentUser && this.currentUser.roles.includes(Role.TRAVELER);
+        }); 
+
+        console.log(this.currentUser)
+
     }
 
-    get isAdmin() {
-        return this.currentUser && this.currentUser.roles.includes(Role.Admin);
-    }
-
+ 
     logout() {
         this.authenticationService.logout();
         this.router.navigate(['/login']);
