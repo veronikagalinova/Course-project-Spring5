@@ -9,6 +9,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CompanyLinesComponent } from './components/bus-company/company-lines/company-lines.component';
 import { MyTicketsComponent } from './components/traveler/my-tickets/my-tickets.component';
+import { SearchRouteComponent } from './components/traveler/search-route/search-route.component';
 
 const routes: Routes = [
   {
@@ -47,7 +48,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.TRAVELER] }
   },
-  
+  {
+    path: 'search',
+    component: SearchRouteComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.TRAVELER] }
+  },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

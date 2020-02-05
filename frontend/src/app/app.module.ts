@@ -18,6 +18,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { MyTicketsComponent } from './components/traveler/my-tickets/my-tickets.component';
 import { AuthGuard } from './_helpers/auth.guard';
 import { AuthenticationService } from './_services/authentication.service';
+import { SearchRouteComponent } from './components/traveler/search-route/search-route.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { AuthenticationService } from './_services/authentication.service';
     RegisterComponent,
     ProfileComponent,
     CompanyLinesComponent,
-    MyTicketsComponent
+    MyTicketsComponent,
+    SearchRouteComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +41,7 @@ import { AuthenticationService } from './_services/authentication.service';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
     BrowserAnimationsModule
   ],
   providers: [
