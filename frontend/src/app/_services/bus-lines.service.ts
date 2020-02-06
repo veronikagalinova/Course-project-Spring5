@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { BusLine } from '../_models/BusLine';
 import { Observable, of } from 'rxjs';
+import { Stop } from '../_models/Stop';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,13 @@ export class BusLinesService {
   getAll() {
     // return this.http.get<BusLine[]>(`${environment.apiUrl}/api/busLines`);
     return this.http.get<BusLine[]>('http://localhost:4200/assets/lines.json');
+  }
 
+  getStops(): Observable<Stop[]> {
+    return this.http.get<Stop[]>('http://localhost:4200/assets/stops.json');
+  }
+
+  addBusLine(newLine: BusLine) {
+    return this.http.post<BusLine>(`${environment.apiUrl}/api/busLines`, newLine);
   }
 }

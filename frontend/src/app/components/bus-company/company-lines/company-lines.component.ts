@@ -3,6 +3,7 @@ import { BusLinesService } from '../../../_services/bus-lines.service';
 import { BusLine } from '../../../_models/BusLine';
 import { CreateBusLineComponent } from '../create-bus-line/create-bus-line.component';
 import { MatTableDataSource, MatDialog } from '@angular/material';
+import { Stop } from '../../../_models/Stop';
 
 @Component({
   selector: 'app-company-lines',
@@ -12,6 +13,8 @@ import { MatTableDataSource, MatDialog } from '@angular/material';
 export class CompanyLinesComponent implements OnInit {
 
   companyLines: BusLine[];
+
+  stops: Stop[];
 
   dataSource = new MatTableDataSource<BusLine>();
 
@@ -23,6 +26,7 @@ export class CompanyLinesComponent implements OnInit {
 
   ngOnInit() {
     this.getLines();
+    this.getStops();
   }
 
 
@@ -33,16 +37,26 @@ export class CompanyLinesComponent implements OnInit {
     });
   }
 
+  getStops() {
+    this.busLinesService.getStops().subscribe(res => {
+      this.stops = res;
+      this.stops.sort();
+    });
+  }
+
   openDialog() {
     let dialogRef = this.dialog.open(CreateBusLineComponent, {
       width: '600px',
-      data: 'Add new line'
+      data: this.stops
     });
-    dialogRef.componentInstance.event.subscribe((result) => {
+    dialogRef.componentInstance.event.subscribe((newLine) => {
+      this.busLinesService.addBusLine(newLine).subscribe(res => console.log('+++++++' + res));
       // this.dataService.addPost(result.newLine);
       // this.dataSource = new PostDataSource(this.dataService);
     });
   }
+
+
 }
 
 

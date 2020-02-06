@@ -6,4 +6,11 @@ export class Route {
     endPoint: Stop;
     duration: number;
     distance: number;
+
+    constructor(startPoint: Stop, endPoint: Stop, duration: number, distance: number) {
+        this.startPoint = startPoint;
+        this.endPoint = endPoint;
+        this.duration = duration;
+        this.distance = distance;
+    }
 }

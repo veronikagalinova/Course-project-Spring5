@@ -1,33 +1,45 @@
-<h1 mat-dialog-title>{{data}}</h1>
+<h1 mat-dialog-title>Add new line</h1>
 
 <mat-dialog-content [formGroup]="form">
 
     <mat-form-field>
-        <input matInput placeholder="Start point" formControlName="startPoint">
+        <mat-label>Start point</mat-label>
+        <mat-select formControlName="startPoint">
+            <mat-option *ngFor="let stop of stops" [value]="stop">{{stop.location}}
+            </mat-option>
+        </mat-select>
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput placeholder="End point" formControlName="endPoint">
+        <mat-label>End point</mat-label>
+        <mat-select formControlName="endPoint">
+            <mat-option *ngFor="let stop of stops" [value]="stop">{{stop.location}}
+            </mat-option>
+        </mat-select>
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput placeholder="Distance" formControlName="distance">
+        <input matInput placeholder="Distance" type="number" step="10" min="0" formControlName="distance">
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput placeholder="Duration" formControlName="duration">
+        <input matInput placeholder="Duration" type="number" step="0.1" min="0" formControlName="duration">
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput placeholder="Price" formControlName="price">
+        <input matInput placeholder="Price" type="number" step="1" min="0" formControlName="price">
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput placeholder="Seats" formControlName="seats">
+        <input matInput placeholder="Seats" type="number" step="1" min="0" formControlName="seats">
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput placeholder="Working days" formControlName="workingDays">
+        <mat-label>Working days</mat-label>
+        <mat-select formControlName="workingDays" multiple>
+            <mat-option *ngFor="let day of workingDays" [value]="day">{{day}}
+            </mat-option>
+        </mat-select>
     </mat-form-field>
 
     <mat-form-field>
@@ -38,5 +50,5 @@
 
 <mat-dialog-actions>
     <button class="mat-raised-button" (click)="close()">Close</button>
-    <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+    <button class="mat-raised-button mat-primary" [disabled]="!form.valid" (click)="save()">Save</button>
 </mat-dialog-actions>
