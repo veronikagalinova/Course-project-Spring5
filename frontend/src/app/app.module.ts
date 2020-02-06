@@ -20,6 +20,7 @@ import { AuthGuard } from './_helpers/auth.guard';
 import { AuthenticationService } from './_services/authentication.service';
 import { SearchRouteComponent } from './components/traveler/search-route/search-route.component';
 import { RouterModule } from '@angular/router';
+import { CreateBusLineComponent } from './components/bus-company/create-bus-line/create-bus-line.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { RouterModule } from '@angular/router';
     CompanyLinesComponent,
     MyTicketsComponent,
     SearchRouteComponent,
+    CreateBusLineComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +50,9 @@ import { RouterModule } from '@angular/router';
     AuthenticationService, AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    CreateBusLineComponent
+  ]
 })
 export class AppModule { }

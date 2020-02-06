@@ -21,7 +21,8 @@ import {
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatCardModule,
-  MatMenuModule
+  MatMenuModule,
+  MatDialogModule
 } from '@angular/material';
 
 
@@ -47,7 +48,8 @@ import {
     MatProgressSpinnerModule,
     MatTableModule,
     MatPaginatorModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule
   ],
   exports: [
     MatButtonModule,
@@ -68,7 +70,8 @@ import {
     MatTableModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule
   ],
   providers: [
     MatDatepickerModule,

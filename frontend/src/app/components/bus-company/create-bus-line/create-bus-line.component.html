@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>{{data}}</h1>
+
+<mat-dialog-content [formGroup]="form">
+
+    <mat-form-field>
+        <input matInput placeholder="Start point" formControlName="startPoint">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="End point" formControlName="endPoint">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Distance" formControlName="distance">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Duration" formControlName="duration">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Price" formControlName="price">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Seats" formControlName="seats">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Working days" formControlName="workingDays">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Departure time" formControlName="departureTime">
+    </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button" (click)="close()">Close</button>
+    <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+</mat-dialog-actions>
