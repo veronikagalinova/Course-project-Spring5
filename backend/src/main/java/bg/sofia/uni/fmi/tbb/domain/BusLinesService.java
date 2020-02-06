@@ -9,7 +9,6 @@ public interface BusLinesService {
     List<BusLine> findAll();
     BusLine findById(String id);
     List<BusLine> findByCompany(String company);
-    List<BusLine> findByStartPointAndEndPoint(String startPoint, String endPoint);
     BusLine insert(BusLine busLine);
     BusLine update(BusLine busLine);
     BusLine delete(String id);

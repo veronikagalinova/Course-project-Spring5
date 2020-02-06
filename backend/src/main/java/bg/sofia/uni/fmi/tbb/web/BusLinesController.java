@@ -30,13 +30,6 @@ public class BusLinesController {
         return service.findById(id);
     }
 
-    @GetMapping("{start}/{end}")
-    public List<BusLine> getBusLinesByStartAndEndPoints(
-            @PathVariable("start") String startPoint,
-            @PathVariable("end") String endPoint) {
-        return service.findByStartPointAndEndPoint(startPoint, endPoint);
-    }
-
     @PostMapping
     @IsBusCompanyOrAdmin
     public ResponseEntity<BusLine> createBusLine(@RequestBody BusLine busLine,

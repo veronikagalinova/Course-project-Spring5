@@ -10,5 +10,4 @@ import java.util.Optional;
 @Repository
 public interface BusLinesRepository extends MongoRepository<BusLine, String> {
     Optional<List<BusLine>> findAllByCompany(String company);
-    Optional<List<BusLine>> findAllByStartPointAndEndPoint(String startPoint, String endPoint);
 }

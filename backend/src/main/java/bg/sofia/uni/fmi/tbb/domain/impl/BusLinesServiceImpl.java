@@ -1,6 +1,7 @@
-package bg.sofia.uni.fmi.tbb.domain;
+package bg.sofia.uni.fmi.tbb.domain.impl;
 
 import bg.sofia.uni.fmi.tbb.dao.BusLinesRepository;
+import bg.sofia.uni.fmi.tbb.domain.BusLinesService;
 import bg.sofia.uni.fmi.tbb.exception.InvalidEntityException;
 import bg.sofia.uni.fmi.tbb.exception.NonexistingEntityException;
 import bg.sofia.uni.fmi.tbb.model.BusLine;
@@ -32,16 +33,6 @@ public class BusLinesServiceImpl implements BusLinesService {
     public List<BusLine> findByCompany(String company) {
         return repository.findAllByCompany(company).orElseThrow(() -> new NonexistingEntityException(
                 String.format("BusLines of company='%s' do not exist.", company)
-        ));
-    }
-
-    @Override
-    public List<BusLine> findByStartPointAndEndPoint(String startPoint,
-                                                     String endPoint) {
-        return repository.findAllByStartPointAndEndPoint(startPoint,
-                endPoint).orElseThrow(() -> new NonexistingEntityException(
-                String.format("BusLines from='%s' to='%s' do not exist.",
-                        startPoint, endPoint)
         ));
     }
 
