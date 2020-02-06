@@ -37,7 +37,7 @@ public class BusLinesController {
         User busLineUser = (User) authentication.getPrincipal();
         busLine.setCompanyId(busLineUser.getId());
         busLine.setCompany(busLineUser.getFirstName());
-        BusLine created = service.insert(busLine);
+        BusLine created = service.createIfNotExist(busLine);
         URI location =
                 MvcUriComponentsBuilder
                         .fromMethodName(BusLinesController.class,

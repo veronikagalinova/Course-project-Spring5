@@ -5,6 +5,7 @@ import bg.sofia.uni.fmi.tbb.domain.BusLinesService;
 import bg.sofia.uni.fmi.tbb.exception.InvalidEntityException;
 import bg.sofia.uni.fmi.tbb.exception.NonexistingEntityException;
 import bg.sofia.uni.fmi.tbb.model.BusLine;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class BusLinesServiceImpl implements BusLinesService {
     @Autowired
     private BusLinesRepository repository;
@@ -37,8 +39,17 @@ public class BusLinesServiceImpl implements BusLinesService {
     }
 
     @Override
-    public BusLine insert(@Valid  BusLine busLine) {
-        return repository.insert(busLine);
+    public BusLine createIfNotExist(@Valid  BusLine busLine) {
+        if (busLine.getId() == null) {
+            return repository.insert(busLine);
+        }
+        Optional<BusLine> result = repository.findById(busLine.getId());
+        if(result.isPresent()) {
+            return result.get();
+        } else {
+            log.info("Inserting new Bus Line: {}", busLine);
+            return repository.insert(busLine);
+        }
     }
 
     @Override

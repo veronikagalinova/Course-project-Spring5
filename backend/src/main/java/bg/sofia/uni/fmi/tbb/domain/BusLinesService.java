@@ -9,7 +9,7 @@ public interface BusLinesService {
     List<BusLine> findAll();
     BusLine findById(String id);
     List<BusLine> findByCompany(String company);
-    BusLine insert(BusLine busLine);
+    BusLine createIfNotExist(BusLine busLine);
     BusLine update(BusLine busLine);
     BusLine delete(String id);
 }

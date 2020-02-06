@@ -3,6 +3,7 @@ package bg.sofia.uni.fmi.tbb.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Document(collection = "routes")
 @Data
 @AllArgsConstructor
+@RequiredArgsConstructor
 public class Route {
     @Id
     private String id;
