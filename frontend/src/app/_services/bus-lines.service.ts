@@ -14,15 +14,14 @@ export class BusLinesService {
   constructor(private http: HttpClient) { }
 
   getAll() {
-    // return this.http.get<BusLine[]>(`${environment.apiUrl}/api/busLines`);
-    return this.http.get<BusLine[]>('http://localhost:4200/assets/lines.json');
+    return this.http.get<BusLine[]>(`${environment.apiUrl}/api/busLines`);
   }
 
   getStops(): Observable<Stop[]> {
     return this.http.get<Stop[]>('http://localhost:4200/assets/stops.json');
   }
 
-  addBusLine(newLine: BusLine) {
+  addBusLine(newLine: BusLine): Observable<BusLine> {
     return this.http.post<BusLine>(`${environment.apiUrl}/api/busLines`, newLine);
   }
 }

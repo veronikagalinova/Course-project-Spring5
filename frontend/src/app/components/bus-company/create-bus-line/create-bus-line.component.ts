@@ -50,7 +50,7 @@ export class CreateBusLineComponent {
   save(): void {
     const route = new Route(this.f.startPoint.value, this.f.endPoint.value,
       this.f.duration.value, this.f.distance.value);
-    this.newLine = new BusLine(route, this.f.seats.value, this.f.workingDays.value, this.f.departureTime.value);
+    this.newLine = new BusLine(route, this.f.price.value, this.f.seats.value, this.f.workingDays.value, this.f.departureTime.value);
     this.event.emit(this.newLine);
     this.dialogRef.close();
   }
