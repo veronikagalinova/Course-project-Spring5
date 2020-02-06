@@ -1,0 +1,121 @@
+[{
+        "id": "5e3bf143b4fd2c48775d58a1",
+        "route": {
+            "startPoint": {
+                "location": "Sofia"
+            },
+            "endPoint": {
+                "location": "Varna"
+            },
+            "distance": 300,
+            "duration": 5.5
+        },
+        "price": "30",
+        "seats": "40",
+        "workingDays": [
+            "SATURDAY",
+            "SUNDAY"
+        ],
+        "departureTime": "21:50:00"
+    },
+    {
+        "id": "5e3bf143b4fd2c48775d58a1",
+        "route": {
+            "startPoint": {
+                "location": "Sofia"
+            },
+            "endPoint": {
+                "location": "Varna"
+            },
+            "distance": 300,
+            "duration": 5.5
+        },
+        "price": "30",
+        "seats": "40",
+        "workingDays": [
+            "SATURDAY",
+            "SUNDAY"
+        ],
+        "departureTime": "21:50:00"
+    },
+    {
+        "id": "5e3bf143b4fd2c48775d58a1",
+        "route": {
+            "startPoint": {
+                "location": "Sofia"
+            },
+            "endPoint": {
+                "location": "Varna"
+            },
+            "distance": 300,
+            "duration": 5.5
+        },
+        "price": "30",
+        "seats": "40",
+        "workingDays": [
+            "SATURDAY",
+            "SUNDAY"
+        ],
+        "departureTime": "21:50:00"
+    },
+    {
+        "id": "5e3bf143b4fd2c48775d58a1",
+        "route": {
+            "startPoint": {
+                "location": "Sofia"
+            },
+            "endPoint": {
+                "location": "Varna"
+            },
+            "distance": 300,
+            "duration": 5.5
+        },
+        "price": "30",
+        "seats": "40",
+        "workingDays": [
+            "SATURDAY",
+            "SUNDAY"
+        ],
+        "departureTime": "21:50:00"
+    },
+    {
+        "id": "5e3bf143b4fd2c48775d58a1",
+        "route": {
+            "startPoint": {
+                "location": "Sofia"
+            },
+            "endPoint": {
+                "location": "Varna"
+            },
+            "distance": 300,
+            "duration": 5.5
+        },
+        "price": "30",
+        "seats": "40",
+        "workingDays": [
+            "SATURDAY",
+            "SUNDAY"
+        ],
+        "departureTime": "21:50:00"
+    },
+    {
+        "id": "5e3bf143b4fd2c48775d58a1",
+        "route": {
+            "startPoint": {
+                "location": "Sofia"
+            },
+            "endPoint": {
+                "location": "Varna"
+            },
+            "distance": 300,
+            "duration": 5.5
+        },
+        "price": "30",
+        "seats": "40",
+        "workingDays": [
+            "SATURDAY",
+            "SUNDAY"
+        ],
+        "departureTime": "21:50:00"
+    }
+]

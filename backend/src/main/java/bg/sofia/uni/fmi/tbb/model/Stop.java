@@ -1,7 +1,6 @@
 package bg.sofia.uni.fmi.tbb.model;
 
-import lombok.Data;
-import lombok.NonNull;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,6 +11,8 @@ import javax.validation.constraints.NotNull;
  */
 @Document(collection = "stops")
 @Data
+@NoArgsConstructor
+@RequiredArgsConstructor
 public class Stop {
     @Id
     private String id;

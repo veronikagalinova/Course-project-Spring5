@@ -31,7 +31,7 @@ import { RouterModule } from '@angular/router';
     ProfileComponent,
     CompanyLinesComponent,
     MyTicketsComponent,
-    SearchRouteComponent
+    SearchRouteComponent,
   ],
   imports: [
     BrowserModule,

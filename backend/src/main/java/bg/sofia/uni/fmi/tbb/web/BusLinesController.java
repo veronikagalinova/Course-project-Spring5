@@ -7,6 +7,7 @@ import bg.sofia.uni.fmi.tbb.model.BusLine;
 import bg.sofia.uni.fmi.tbb.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
@@ -21,6 +22,7 @@ public class BusLinesController {
     private BusLinesService service;
 
     @GetMapping
+    @PostFilter("filterObject.companyId == authentication.principal.id")
     public List<BusLine> getBusLines() {
         return service.findAll();
     }

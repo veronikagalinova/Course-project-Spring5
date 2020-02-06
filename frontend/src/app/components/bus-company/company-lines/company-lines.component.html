@@ -1,1 +1,71 @@
-<p>company-lines works!</p>
+<div>
+    <br>
+    <div class="container">
+        <div class="container">
+            <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row" fxLayoutAlign="space-around center" class="content">
+                <div class="blocks">
+                    <button button="submit" mat-raised-button color="primary">
+                        <mat-icon>add</mat-icon> Add new line
+                    </button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="container">
+            <div fxLayout="row" fxLayoutAlign="center center" class="content">
+                <mat-card class="card">
+                    <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+                        <h3>Company lines</h3>
+                    </mat-card-title>
+                    <mat-card-content>
+                        <div class="mat-elevation-z8">
+
+                            <table mat-table matSort [dataSource]="dataSource" *ngIf="companyLines">
+
+                                <ng-container matColumnDef="startPoint">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Point </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.route.startPoint.location}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="endPoint">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> End point </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.route.endPoint.location}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="duration">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Duration </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.route.duration}} h</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="departureTime">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Departure </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.departureTime}} h</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="price">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.price}} BGN</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="distance">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Distance </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.route.distance}} km</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="workingDays">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Working days </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.workingDays}}</td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+
+                            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
