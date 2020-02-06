@@ -2,8 +2,8 @@ package bg.sofia.uni.fmi.tbb.web;
 
 import bg.sofia.uni.fmi.tbb.config.JwtTokenUtil;
 import bg.sofia.uni.fmi.tbb.domain.UsersService;
-import bg.sofia.uni.fmi.tbb.model.JwtRequest;
-import bg.sofia.uni.fmi.tbb.model.JwtResponse;
+import bg.sofia.uni.fmi.tbb.dto.JwtRequest;
+import bg.sofia.uni.fmi.tbb.dto.JwtResponse;
 import bg.sofia.uni.fmi.tbb.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

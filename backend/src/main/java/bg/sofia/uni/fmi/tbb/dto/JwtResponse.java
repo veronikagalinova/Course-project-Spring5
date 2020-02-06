@@ -1,4 +1,4 @@
-package bg.sofia.uni.fmi.tbb.model;
+package bg.sofia.uni.fmi.tbb.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
