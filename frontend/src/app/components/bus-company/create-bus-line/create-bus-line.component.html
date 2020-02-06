@@ -45,8 +45,11 @@
     <mat-form-field>
         <mat-label>Departure time</mat-label>
         <div>
-            <input matInput [ngxTimepicker]="picker" formControlName="departureTime">
+            <!-- <input matInput [ngxTimepicker]="picker" formControlName="departureTime"> -->
+            <input matInput type="time" formControlName="departureTime">
+
             <ngx-material-timepicker #picker [format]="24" [appendToInput]="true"></ngx-material-timepicker>
+
         </div>
 
     </mat-form-field>
