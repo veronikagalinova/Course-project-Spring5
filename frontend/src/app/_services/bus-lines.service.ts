@@ -24,4 +24,12 @@ export class BusLinesService {
   addBusLine(newLine: BusLine): Observable<BusLine> {
     return this.http.post<BusLine>(`${environment.apiUrl}/api/busLines`, newLine);
   }
+
+  updateBusLine(busLine: BusLine): Observable<BusLine> {
+    return this.http.put<BusLine>(`${environment.apiUrl}/api/busLines/${busLine.id}`, busLine);
+  }
+
+  deleteBusLine(busLineId: string): Observable<BusLine> {
+    return this.http.delete<BusLine>(`${environment.apiUrl}/api/busLines/${busLineId}`);
+  }
 }

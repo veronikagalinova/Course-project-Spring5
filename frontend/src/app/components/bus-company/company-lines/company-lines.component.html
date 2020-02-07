@@ -4,7 +4,7 @@
         <div class="container">
             <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row" fxLayoutAlign="space-around center" class="content">
                 <div class="blocks">
-                    <button button="submit" mat-raised-button color="primary" (click)="openDialog()">
+                    <button button="submit" mat-raised-button color="primary" (click)="openDialog('Add',undefined)">
                         <mat-icon>add</mat-icon> Add new line
                     </button>
                 </div>
@@ -55,6 +55,19 @@
                                 <ng-container matColumnDef="workingDays">
                                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Working days </th>
                                     <td mat-cell *matCellDef="let element"> {{element.workingDays}}</td>
+                                </ng-container>
+
+                                <!-- Action Column -->
+                                <ng-container matColumnDef="action">
+                                    <th mat-header-cell *matHeaderCellDef> Action </th>
+                                    <td mat-cell *matCellDef="let element" class="action-link">
+                                        <a (click)="openDialog('Update',element)">
+                                            <mat-icon>edit</mat-icon>
+                                        </a> |
+                                        <a (click)="openDialog('Delete',element)">
+                                            <mat-icon>delete</mat-icon>
+                                        </a>
+                                    </td>
                                 </ng-container>
 
                                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

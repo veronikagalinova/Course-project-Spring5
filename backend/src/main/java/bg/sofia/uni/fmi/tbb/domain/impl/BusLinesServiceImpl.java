@@ -54,6 +54,7 @@ public class BusLinesServiceImpl implements BusLinesService {
 
     @Override
     public BusLine update(BusLine busLine) {
+        log.info("Updating line " + busLine.getId() + " new line is {}", busLine);
         return repository.save(busLine);
     }
 

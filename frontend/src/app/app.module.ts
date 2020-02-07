@@ -21,9 +21,9 @@ import { AuthGuard } from './_helpers/auth.guard';
 import { AuthenticationService } from './_services/authentication.service';
 import { SearchRouteComponent } from './components/traveler/search-route/search-route.component';
 import { RouterModule } from '@angular/router';
-import { CreateBusLineComponent } from './components/bus-company/create-bus-line/create-bus-line.component';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { GlobalErrorHandler } from './_helpers/error.handler';
+import { BusLineDialogComponent } from './components/bus-company/bus-line-dialog/bus-line-dialog.component';
 
 export class CdkOverlayContainer extends OverlayContainer {
 
@@ -47,7 +47,7 @@ export class CdkOverlayContainer extends OverlayContainer {
     CompanyLinesComponent,
     MyTicketsComponent,
     SearchRouteComponent,
-    CreateBusLineComponent,
+    BusLineDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,7 +69,7 @@ export class CdkOverlayContainer extends OverlayContainer {
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    CreateBusLineComponent
+    BusLineDialogComponent
   ]
 })
 export class AppModule { }

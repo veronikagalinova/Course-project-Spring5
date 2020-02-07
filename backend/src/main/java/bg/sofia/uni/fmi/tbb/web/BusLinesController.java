@@ -52,7 +52,10 @@ public class BusLinesController {
     @IsBusCompanyOrAdmin
     @IsOwnerOrAdmin
     public ResponseEntity<BusLine> updateBusLine(@PathVariable String id,
-                                                 @RequestBody BusLine busLine) {
+                                                 @RequestBody BusLine busLine,
+                                                 Authentication authentication) {
+        User busLineUser = (User) authentication.getPrincipal();
+        busLine.setCompanyId(busLineUser.getId());
         BusLine updated = service.update(busLine);
         return ResponseEntity.ok(updated);
     }
