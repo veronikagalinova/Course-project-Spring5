@@ -3,7 +3,7 @@ import { BusLine } from '../../../_models/BusLine';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BusLinesService } from 'src/app/_services/bus-lines.service';
-import { Stop } from 'src/app/_models/Stop';
+import { Stop } from '@app/_models/Stop';
 import { DayOfWeek } from '../../../_models/DayOfWeek';
 import { Route } from '../../../_models/Route';
 
