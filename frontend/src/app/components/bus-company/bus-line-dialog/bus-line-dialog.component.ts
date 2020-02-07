@@ -25,7 +25,6 @@ export class BusLineDialogComponent {
     public dialogRef: MatDialogRef<BusLineDialogComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
 
-    console.log(data);
     this.title = `${data.action} bus line`;
     this.busLine = data.busLine;
     this.action = data.action;
@@ -57,13 +56,15 @@ export class BusLineDialogComponent {
 
   doAction(): void {
 
-    if (this.action === 'Add' || this.action == 'Edit') {
+    if (this.action === 'Add' || this.action == 'Update') {
 
       const route = new Route(this.f.startPoint.value, this.f.endPoint.value,
         this.f.duration.value, this.f.distance.value);
 
+      const id = this.busLine.id;
       this.busLine = new BusLine(route, this.f.price.value, this.f.seats.value,
         this.f.workingDays.value, this.f.departureTime.value);
+      if (id) this.busLine.id = id; // when creating new line there is no id, when update bus line keep line id
     }
 
     this.event.emit({ event: this.action, busLine: this.busLine });

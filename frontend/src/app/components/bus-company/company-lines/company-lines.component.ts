@@ -77,11 +77,7 @@ export class CompanyLinesComponent implements OnInit {
   }
 
   updateLine(busLine: BusLine) {
-    console.log('----------------updating: newline: ');
-    console.log(busLine)
     this.busLinesService.updateBusLine(busLine).subscribe(res => {
-      console.log("**************updated");
-      console.log(res)
       this.getLines();
       this.showSuccessMsg('updated');
     });
