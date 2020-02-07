@@ -20,3 +20,7 @@ mat-card-content {
 .test {
     z-index: 999!important;
 }
+
+.success-snack-bar {
+    background-color: green !important;
+}

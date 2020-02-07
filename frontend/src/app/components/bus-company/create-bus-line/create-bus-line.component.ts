@@ -1,8 +1,7 @@
-import { Component, OnInit, EventEmitter, Inject } from '@angular/core';
+import { Component, EventEmitter, Inject } from '@angular/core';
 import { BusLine } from '../../../_models/BusLine';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { BusLinesService } from 'src/app/_services/bus-lines.service';
 import { Stop } from '@app/_models/Stop';
 import { DayOfWeek } from '../../../_models/DayOfWeek';
 import { Route } from '../../../_models/Route';
@@ -27,7 +26,6 @@ export class CreateBusLineComponent {
   constructor(private fb: FormBuilder,
     public dialogRef: MatDialogRef<CreateBusLineComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-    console.log(data)
     this.stops = data;
     this.form = fb.group({
       startPoint: ['', Validators.required],
@@ -50,7 +48,8 @@ export class CreateBusLineComponent {
   save(): void {
     const route = new Route(this.f.startPoint.value, this.f.endPoint.value,
       this.f.duration.value, this.f.distance.value);
-    this.newLine = new BusLine(route, this.f.price.value, this.f.seats.value, this.f.workingDays.value, this.f.departureTime.value);
+    this.newLine = new BusLine(route, this.f.price.value, this.f.seats.value,
+      this.f.workingDays.value, this.f.departureTime.value);
     this.event.emit(this.newLine);
     this.dialogRef.close();
   }

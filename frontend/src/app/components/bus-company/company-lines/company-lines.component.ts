@@ -1,8 +1,8 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, ViewChild } from '@angular/core';
 import { BusLinesService } from '../../../_services/bus-lines.service';
 import { BusLine } from '../../../_models/BusLine';
 import { CreateBusLineComponent } from '../create-bus-line/create-bus-line.component';
-import { MatTableDataSource, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatDialog, MatSnackBar, MatPaginator } from '@angular/material';
 import { Stop } from '../../../_models/Stop';
 
 @Component({
@@ -11,7 +11,6 @@ import { Stop } from '../../../_models/Stop';
   styleUrls: ['./company-lines.component.css']
 })
 export class CompanyLinesComponent implements OnInit {
-
   companyLines: BusLine[];
 
   stops: Stop[];
@@ -21,12 +20,16 @@ export class CompanyLinesComponent implements OnInit {
   displayedColumns: string[] = ['startPoint', 'endPoint', 'duration',
     'departureTime', 'price', 'distance', 'workingDays'];
 
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
   constructor(private busLinesService: BusLinesService,
+    public snackBar: MatSnackBar,
     public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getLines();
     this.getStops();
+    this.dataSource.paginator = this.paginator;
   }
 
 
@@ -49,13 +52,24 @@ export class CompanyLinesComponent implements OnInit {
       width: '600px',
       data: this.stops
     });
+
     dialogRef.componentInstance.event.subscribe((newLine) => {
-      this.busLinesService.addBusLine(newLine).subscribe(res => console.log('+++++++' + res));
-      // this.dataService.addPost(result.newLine);
-      // this.dataSource = new PostDataSource(this.dataService);
+      this.busLinesService.addBusLine(newLine).subscribe(res => {
+        this.getLines();
+        this.showSuccessMsg();
+      });
+
     });
   }
 
+  showSuccessMsg() {
+    const successfullCreationMsg = "New bus line is created successfully!";
+
+    this.snackBar.open(successfullCreationMsg, '', {
+      duration: 5000,
+      panelClass: ['success-snack-bar']
+    });
+  }
 
 }
 
