@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +23,7 @@ import { SearchRouteComponent } from './components/traveler/search-route/search-
 import { RouterModule } from '@angular/router';
 import { CreateBusLineComponent } from './components/bus-company/create-bus-line/create-bus-line.component';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { GlobalErrorHandler } from './_helpers/error.handler';
 
 export class CdkOverlayContainer extends OverlayContainer {
 
@@ -63,7 +64,8 @@ export class CdkOverlayContainer extends OverlayContainer {
   providers: [
     AuthenticationService, AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: OverlayContainer, useClass: CdkOverlayContainer }
+    { provide: OverlayContainer, useClass: CdkOverlayContainer },
+    { provide: ErrorHandler, useClass: GlobalErrorHandler }
   ],
   bootstrap: [AppComponent],
   entryComponents: [
