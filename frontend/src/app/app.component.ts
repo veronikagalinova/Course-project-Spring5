@@ -25,13 +25,12 @@ export class AppComponent {
             this.isAuthenticated = this.currentUser != null;
             this.isBusCompany = this.currentUser && this.currentUser.roles.includes(Role.BUS_COMPANY);
             this.isTraveler = this.currentUser && this.currentUser.roles.includes(Role.TRAVELER);
-        }); 
+        });
 
-        console.log(this.currentUser)
 
     }
 
- 
+
     logout() {
         this.authenticationService.logout();
         this.router.navigate(['/login']);
