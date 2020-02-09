@@ -1,1 +1,28 @@
-<p>search-route works!</p>
+<div class="container">
+    <div fxLayout="row" fxLayoutAlign="center center" class="content">
+        <mat-form-field>
+            <mat-label>Start point</mat-label>
+            <mat-select [(ngModel)]="startPoint">
+                <mat-option *ngFor="let stop of stops" [value]="stop.location">
+                    {{stop.location}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>End point</mat-label>
+            <mat-select [(ngModel)]="endPoint">
+                <mat-option *ngFor="let stop of stops| stopsFilter: startPoint" [value]="stop.location">
+                    {{stop.location}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" [value]="travelDate.value" [min]="minTravelDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+</div>

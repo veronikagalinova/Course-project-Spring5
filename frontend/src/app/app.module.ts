@@ -24,6 +24,8 @@ import { RouterModule } from '@angular/router';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { GlobalErrorHandler } from './_helpers/error.handler';
 import { BusLineDialogComponent } from './components/bus-company/bus-line-dialog/bus-line-dialog.component';
+import { MAT_DATE_LOCALE } from '@angular/material';
+import { StopsFilterPipe } from './pipes/stops.filter.pipe';
 
 export class CdkOverlayContainer extends OverlayContainer {
 
@@ -48,6 +50,7 @@ export class CdkOverlayContainer extends OverlayContainer {
     MyTicketsComponent,
     SearchRouteComponent,
     BusLineDialogComponent,
+    StopsFilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -62,10 +65,12 @@ export class CdkOverlayContainer extends OverlayContainer {
     NgxMaterialTimepickerModule
   ],
   providers: [
-    AuthenticationService, AuthGuard,
+    AuthenticationService,
+    AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: OverlayContainer, useClass: CdkOverlayContainer },
-    { provide: ErrorHandler, useClass: GlobalErrorHandler }
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
   ],
   bootstrap: [AppComponent],
   entryComponents: [
