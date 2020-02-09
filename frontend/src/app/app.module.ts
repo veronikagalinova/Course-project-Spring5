@@ -26,6 +26,7 @@ import { GlobalErrorHandler } from './_helpers/error.handler';
 import { BusLineDialogComponent } from './components/bus-company/bus-line-dialog/bus-line-dialog.component';
 import { MAT_DATE_LOCALE } from '@angular/material';
 import { StopsFilterPipe } from './pipes/stops.filter.pipe';
+import { SearchResultComponent } from './components/traveler/search-result/search-result.component';
 
 export class CdkOverlayContainer extends OverlayContainer {
 
@@ -51,6 +52,7 @@ export class CdkOverlayContainer extends OverlayContainer {
     SearchRouteComponent,
     BusLineDialogComponent,
     StopsFilterPipe,
+    SearchResultComponent,
   ],
   imports: [
     BrowserModule,

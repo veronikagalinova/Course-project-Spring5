@@ -1,21 +1,16 @@
 package bg.sofia.uni.fmi.tbb.model;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Document(collection = "routes")
 @Data
 @AllArgsConstructor
 @RequiredArgsConstructor
 @NoArgsConstructor
 public class Route {
-    @Id
-    private String id;
 
     @NotNull
     @NonNull

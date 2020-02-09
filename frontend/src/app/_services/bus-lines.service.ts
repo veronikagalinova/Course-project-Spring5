@@ -5,6 +5,7 @@ import { environment } from '@environments/environment';
 import { BusLine } from '../_models/BusLine';
 import { Observable, of } from 'rxjs';
 import { Stop } from '../_models/Stop';
+import { BusLineSearchResult } from '../_models/BusLineSearchResult';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,9 @@ export class BusLinesService {
 
   deleteBusLine(busLineId: string): Observable<BusLine> {
     return this.http.delete<BusLine>(`${environment.apiUrl}/api/busLines/${busLineId}`);
+  }
+
+  searchRoute(startPoint: string, endPoint: string, travelDate: string) {
+    return this.http.get<BusLineSearchResult[]>(`${environment.apiUrl}/api/busLines/${startPoint}/${endPoint}/${travelDate}`);
   }
 }
