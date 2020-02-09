@@ -39,6 +39,11 @@ public class BusLinesServiceImpl implements BusLinesService {
     }
 
     @Override
+    public BusLine create(@Valid BusLine busLine) {
+        return repository.insert(busLine);
+    }
+
+    @Override
     public BusLine createIfNotExist(@Valid  BusLine busLine) {
         if (busLine.getId() == null) {
             return repository.insert(busLine);

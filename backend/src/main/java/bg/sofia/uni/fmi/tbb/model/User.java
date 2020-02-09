@@ -31,6 +31,8 @@ import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
 public class User implements UserDetails {
 
     public static final String ADMIN = "ROLE_ADMIN";
+    public static final String BUS_COMPANY = "ROLE_BUS_COMPANY";
+    public static final String TRAVELER = "ROLE_TRAVELER";
 
     @Id
     private String id;
@@ -41,6 +43,8 @@ public class User implements UserDetails {
     private String username;
 
     // @Pattern(regexp = "((?=.*[a-z])(?=.*d)(?=.*[@#$%])(?=.*[A-Z]).{6,16})")
+    @NotNull
+    @NonNull
     @JsonProperty(access = WRITE_ONLY)
     private String password;
 
