@@ -1,6 +1,7 @@
-package bg.sofia.uni.fmi.tbb.domain;
+package bg.sofia.uni.fmi.tbb.domain.impl;
 
 import bg.sofia.uni.fmi.tbb.dao.UsersRepository;
+import bg.sofia.uni.fmi.tbb.domain.UsersService;
 import bg.sofia.uni.fmi.tbb.exception.InvalidEntityException;
 import bg.sofia.uni.fmi.tbb.exception.NonexistingEntityException;
 
@@ -11,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import javax.validation.Valid;
 import java.util.Arrays;

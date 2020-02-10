@@ -61,7 +61,7 @@ export class BusLineDialogComponent {
       const route = new Route(this.f.startPoint.value, this.f.endPoint.value,
         this.f.duration.value, this.f.distance.value);
 
-      const id = this.busLine.id;
+      const id = this.busLine && this.busLine.id;
       this.busLine = new BusLine(route, this.f.price.value, this.f.seats.value,
         this.f.workingDays.value, this.f.departureTime.value);
       if (id) this.busLine.id = id; // when creating new line there is no id, when update bus line keep line id

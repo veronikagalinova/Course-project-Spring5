@@ -1,1 +1,59 @@
-<p>search-result works!</p>
+<div fxLayout="row" fxLayoutAlign="center center" class="content">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+        <ng-container matColumnDef="startPoint">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> From </th>
+            <td mat-cell *matCellDef="let element"> {{element.startPoint}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="endPoint">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> To </th>
+            <td mat-cell *matCellDef="let element"> {{element.endPoint}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="company">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Company </th>
+            <td mat-cell *matCellDef="let element"> {{element.company}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="departureTime">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Defarture </th>
+            <td mat-cell *matCellDef="let element"> {{element.departureTime}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="arrivalTime">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Arrival </th>
+            <td mat-cell *matCellDef="let element"> {{element.arrivalTime}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+            <td mat-cell *matCellDef="let element"> {{element.price}} BGN</td>
+        </ng-container>
+
+        <ng-container matColumnDef="distance">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Distance </th>
+            <td mat-cell *matCellDef="let element"> {{element.distance}} km</td>
+        </ng-container>
+
+        <ng-container matColumnDef="duration">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Dutaion </th>
+            <td mat-cell *matCellDef="let element"> {{element.duration}} h</td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Buy ticket</th>
+            <td mat-cell *matCellDef="let element" class="action-link">
+                <button mat-button (click)="buyTicket(element)">
+                    <mat-icon>add_shopping_cart</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+    </table>
+</div>

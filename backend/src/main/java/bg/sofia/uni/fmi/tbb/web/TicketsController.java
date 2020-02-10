@@ -16,11 +16,13 @@ public class TicketsController {
     @Autowired
     private TicketsService ticketsService;
 
+    // TO DO - POST FILTER TO GET TICKETS OF CURRENT USER
     @GetMapping
     public List<Ticket> getTickets() {
         return ticketsService.findAll();
     }
 
+    // TO DO - GET BY TICKET ID
     @GetMapping("{userId}")
     public List<Ticket> findAllByUserId(@PathVariable("userId") String userId) {
         return ticketsService.findAllByUserId(userId);

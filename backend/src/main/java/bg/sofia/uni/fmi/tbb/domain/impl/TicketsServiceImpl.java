@@ -1,6 +1,7 @@
-package bg.sofia.uni.fmi.tbb.domain;
+package bg.sofia.uni.fmi.tbb.domain.impl;
 
 import bg.sofia.uni.fmi.tbb.dao.TicketsRepository;
+import bg.sofia.uni.fmi.tbb.domain.TicketsService;
 import bg.sofia.uni.fmi.tbb.exception.InvalidEntityException;
 import bg.sofia.uni.fmi.tbb.exception.NonexistingEntityException;
 import bg.sofia.uni.fmi.tbb.model.Ticket;

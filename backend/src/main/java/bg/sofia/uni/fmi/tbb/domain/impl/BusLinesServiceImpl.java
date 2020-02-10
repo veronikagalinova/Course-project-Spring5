@@ -92,8 +92,9 @@ public class BusLinesServiceImpl implements BusLinesService {
                     .map(b -> {
                         BusLineSearchResult converted =
                                 new BusLineSearchResult(
+                                        b.getId(),
                                         b.getRoute().getStartPoint().getLocation(),
-                                        b.getRoute().getStartPoint().getLocation(),
+                                        b.getRoute().getEndPoint().getLocation(),
                                         b.getCompany(),
                                         b.getDepartureTime(), "CHANGE THIS MOCK",
                                         b.getPrice(),

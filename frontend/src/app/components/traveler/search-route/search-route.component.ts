@@ -3,6 +3,8 @@ import { BusLinesService } from '../../../_services/bus-lines.service';
 import { Stop } from '../../../_models/Stop';
 import { FormControl } from '@angular/forms';
 import * as moment from 'moment';
+import { BusLineSearchResult } from '../../../_models/BusLineSearchResult';
+import { AppConstants } from '../../../app.constants';
 
 @Component({
   selector: 'app-search-route',
@@ -16,6 +18,8 @@ export class SearchRouteComponent implements OnInit {
   endPoint: string;
   travelDate = new FormControl(new Date());
   minTravelDate = new Date(Date.now());
+  searchResults: BusLineSearchResult[];
+  noResultsMsg = AppConstants.SEARCH_ROUTE_NO_RESULT;
 
   constructor(private busLinesService: BusLinesService) { }
 
@@ -40,7 +44,10 @@ export class SearchRouteComponent implements OnInit {
     } else {
       const dateFormatted = moment(this.travelDate.value).format('YYYY-MM-DD');
       this.busLinesService.searchRoute(this.startPoint, this.endPoint, dateFormatted)
-        .subscribe(res => console.log(res))
+        .subscribe(res => {
+        this.searchResults = res;
+          console.log(this.searchResults)
+        });
     }
   }
 

@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class BusLineSearchResult {
+    private String lineId;
     private String startPoint;
     private String endPoint;
     private String company;

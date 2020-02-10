@@ -27,4 +27,20 @@
 
         <button mat-raised-button color="primary" (click)="search()">Search</button>
     </div>
+
+    <ng-container *ngTemplateOutlet="searchResults ? 
+        searchResults && searchResults.length > 0 ? results : noResults :
+        defaultIfUndefinedResults">
+    </ng-container>
+
+    <ng-template #results>
+        <app-search-result [searchResult]="searchResults"></app-search-result>
+    </ng-template>
+
+    <ng-template #noResults>
+        <div>{{ noResultsMsg }}</div>
+    </ng-template>
+
+    <ng-template #defaultIfUndefinedResults>
+    </ng-template>
 </div>
