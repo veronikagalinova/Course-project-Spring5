@@ -34,7 +34,7 @@
     </ng-container>
 
     <ng-template #results>
-        <app-search-result [searchResult]="searchResults"></app-search-result>
+        <app-search-result [searchResult]="searchResults" (newTicketRequest)="buyTicket($event)"></app-search-result>
     </ng-template>
 
     <ng-template #noResults>

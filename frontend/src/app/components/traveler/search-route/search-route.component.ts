@@ -5,6 +5,8 @@ import { FormControl } from '@angular/forms';
 import * as moment from 'moment';
 import { BusLineSearchResult } from '../../../_models/BusLineSearchResult';
 import { AppConstants } from '../../../app.constants';
+import { TicketsService } from '../../../_services/tickets.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-search-route',
@@ -21,7 +23,9 @@ export class SearchRouteComponent implements OnInit {
   searchResults: BusLineSearchResult[];
   noResultsMsg = AppConstants.SEARCH_ROUTE_NO_RESULT;
 
-  constructor(private busLinesService: BusLinesService) { }
+  constructor(private busLinesService: BusLinesService,
+    public snackBar: MatSnackBar,
+    private ticketsService: TicketsService) { }
 
   ngOnInit() {
     this.getStops();
@@ -42,13 +46,31 @@ export class SearchRouteComponent implements OnInit {
       // TO DO - SHOW ERROR MSG
       console.log('***********')
     } else {
-      const dateFormatted = moment(this.travelDate.value).format('YYYY-MM-DD');
+      const dateFormatted = this.formatDate();
       this.busLinesService.searchRoute(this.startPoint, this.endPoint, dateFormatted)
         .subscribe(res => {
-        this.searchResults = res;
+          this.searchResults = res;
           console.log(this.searchResults)
         });
     }
+  }
+
+  buyTicket(event) {
+    const dateFormatted = this.formatDate();
+    this.ticketsService.buyTicket(event, dateFormatted).subscribe(res => this.showSuccessMsg());
+  }
+
+  formatDate(): string {
+    return moment(this.travelDate.value).format('YYYY-MM-DD');
+  }
+
+  showSuccessMsg() {
+    const successfullCreationMsg = `Successfully bought ticket. See details in 'My tickets'.`;
+
+    this.snackBar.open(successfullCreationMsg, '', {
+      duration: 5000,
+      panelClass: ['success-snack-bar']
+    });
   }
 
 }

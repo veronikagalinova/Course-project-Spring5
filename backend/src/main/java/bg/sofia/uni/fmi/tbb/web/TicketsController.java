@@ -1,13 +1,24 @@
 package bg.sofia.uni.fmi.tbb.web;
 
+import bg.sofia.uni.fmi.tbb.domain.BusLinesService;
 import bg.sofia.uni.fmi.tbb.domain.TicketsService;
+import bg.sofia.uni.fmi.tbb.dto.NewTicketRequest;
+import bg.sofia.uni.fmi.tbb.exception.OutOfSeatsException;
 import bg.sofia.uni.fmi.tbb.model.Ticket;
+import bg.sofia.uni.fmi.tbb.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostFilter;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import java.net.URI;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.List;
 
 @RestController
@@ -16,24 +27,30 @@ public class TicketsController {
     @Autowired
     private TicketsService ticketsService;
 
-    // TO DO - POST FILTER TO GET TICKETS OF CURRENT USER
+    @Autowired
+    private BusLinesService busLinesService;
+
     @GetMapping
-    public List<Ticket> getTickets() {
-        return ticketsService.findAll();
+    @PostFilter("filterObject.userId == authentication.principal.id")
+    public ResponseEntity<List<Ticket>> getTickets() {
+        return ResponseEntity.ok(ticketsService.findAll());
     }
 
-    // TO DO - GET BY TICKET ID
-    @GetMapping("{userId}")
-    public List<Ticket> findAllByUserId(@PathVariable("userId") String userId) {
-        return ticketsService.findAllByUserId(userId);
+    @GetMapping("{id}")
+    public ResponseEntity<Ticket> findTicketById(@PathVariable("id") String id) {
+        return ResponseEntity.ok(ticketsService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Ticket> createTicket(@RequestBody Ticket ticket) {
+    public ResponseEntity<Ticket> buyTicket(@RequestBody NewTicketRequest request,
+                                            Authentication authentication) {
+        Ticket ticket = createTicketForBuyRequest(request);
+        ticket.setUserId(((User) authentication.getPrincipal()).getId());
         Ticket created = ticketsService.insert(ticket);
         URI location =
                 MvcUriComponentsBuilder.fromMethodName(TicketsController.class,
-                        "createTicket", Ticket.class).pathSegment("{id}").buildAndExpand(created.getId()).toUri();
+                        "buyTicket", NewTicketRequest.class,
+                        Authentication.class).pathSegment("{id}").buildAndExpand(created.getId()).toUri();
         return ResponseEntity.created(location).body(created);
     }
 
@@ -47,5 +64,54 @@ public class TicketsController {
     @DeleteMapping("{id}")
     public ResponseEntity<Ticket> remove(@PathVariable String id) {
         return ResponseEntity.ok(ticketsService.delete(id));
+    }
+
+    private Ticket createTicketForBuyRequest(NewTicketRequest request) {
+        Ticket ticket = new Ticket();
+        ticket.setStartPoint(request.getRoute().getStartPoint());
+        ticket.setEndPoint(request.getRoute().getEndPoint());
+
+        LocalDateTime departure =
+                getDeparturePresentation(request.getRoute().getDepartureTime(), request.getTravelDate());
+        ticket.setDepartureTime(departure.format(DateTimeFormatter.ofPattern(
+                "dd MMM uuuu HH:mm")));
+
+
+        LocalDateTime arrival =
+                getArrivalRepresentation(request.getRoute().getDuration(),
+                        departure);
+        ticket.setArrivalTime(arrival.format(DateTimeFormatter.ofPattern("dd " +
+                "MMM uuuu HH:mm")));
+
+        ticket.setCompany(request.getRoute().getCompany());
+
+        int seat =
+                busLinesService.findSeatForTravelerTicket(request.getRoute().getLineId());
+        ticket.setSeat(seat);
+        return ticket;
+    }
+
+    private LocalDateTime getDeparturePresentation(String departureStr,
+                                                   LocalDate travelDate) {
+        String[] departureHour = departureStr.split(":");
+        LocalTime hour = LocalTime.of(Integer.parseInt(departureHour[0]),
+                Integer.parseInt(departureHour[1]));
+        LocalDateTime departure = LocalDateTime.of(travelDate, hour);
+
+        return departure;
+    }
+
+    private LocalDateTime getArrivalRepresentation(double durationStr,
+                                                   LocalDateTime departure) {
+        String duration = String.valueOf(durationStr);
+        int indexOfDecimal = duration.indexOf(".");
+        if (indexOfDecimal == -1) {
+            return departure.plusHours(Long.parseLong(duration));
+        }
+        LocalDateTime arrival =
+                departure.plusHours(Long.parseLong(duration.substring(0,
+                        indexOfDecimal)));
+        arrival.plusMinutes(Long.parseLong(duration.substring(indexOfDecimal + 1)));
+        return arrival;
     }
 }

@@ -22,6 +22,13 @@ public class TicketsServiceImpl implements TicketsService {
     }
 
     @Override
+    public Ticket findById(String id) {
+        return repository.findById(id).orElseThrow(() -> new NonexistingEntityException(
+                String.format("Ticket with id='%s' do not exist.", id)
+        ));
+    }
+
+    @Override
     public List<Ticket> findAllByUserId(String userId) {
         return repository.findAllByUserId(userId).orElseThrow(() -> new NonexistingEntityException(
                 String.format("Tickets for user with id='%s' do not exist.", userId)

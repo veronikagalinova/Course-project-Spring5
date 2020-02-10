@@ -5,6 +5,7 @@ import bg.sofia.uni.fmi.tbb.domain.BusLinesService;
 import bg.sofia.uni.fmi.tbb.dto.BusLineSearchResult;
 import bg.sofia.uni.fmi.tbb.exception.InvalidEntityException;
 import bg.sofia.uni.fmi.tbb.exception.NonexistingEntityException;
+import bg.sofia.uni.fmi.tbb.exception.OutOfSeatsException;
 import bg.sofia.uni.fmi.tbb.model.BusLine;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,12 +97,31 @@ public class BusLinesServiceImpl implements BusLinesService {
                                         b.getRoute().getStartPoint().getLocation(),
                                         b.getRoute().getEndPoint().getLocation(),
                                         b.getCompany(),
-                                        b.getDepartureTime(), "CHANGE THIS MOCK",
+                                        b.getDepartureTime(),
                                         b.getPrice(),
                                         b.getRoute().getDuration());
                         return converted;
                     }).collect(Collectors.toList());
         }
         return result;
+    }
+
+    @Override
+    public int findSeatForTravelerTicket(String busLineId) throws OutOfSeatsException {
+        Optional<BusLine> busLineInDB = repository.findById(busLineId);
+        if (!busLineInDB.isPresent()) {
+            throw new InvalidEntityException(String.format("BusLine with " +
+                    "id='%s'" +
+                    " does not exist.", busLineId));
+        }
+
+        BusLine busLine = busLineInDB.get();
+        int seat = busLine.getSeats();
+        if (seat == 0) {
+            throw new OutOfSeatsException(String.format("Bus line with id=%s is out of seats.", busLineId));
+        }
+        busLine.setSeats(--seat);
+        repository.save(busLine);
+        return seat;
     }
 }

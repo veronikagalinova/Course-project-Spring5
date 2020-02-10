@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { BusLineSearchResult } from '../../../_models/BusLineSearchResult';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
@@ -11,6 +11,8 @@ export class SearchResultComponent implements OnInit {
 
   @Input()
   searchResult: BusLineSearchResult[];
+  @Output()
+  newTicketRequest = new EventEmitter<BusLineSearchResult>();
 
   dataSource = new MatTableDataSource<BusLineSearchResult>();
 
@@ -32,7 +34,7 @@ export class SearchResultComponent implements OnInit {
 
 
   buyTicket(element: BusLineSearchResult) {
-    console.log(element)
+    this.newTicketRequest.emit(element);
   }
 
 }

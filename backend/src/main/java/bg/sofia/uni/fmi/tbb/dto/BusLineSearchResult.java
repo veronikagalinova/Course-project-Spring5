@@ -11,7 +11,6 @@ public class BusLineSearchResult {
     private String endPoint;
     private String company;
     private String departureTime;
-    private String arrivalTime;
     private double price;
     private double duration;
 }

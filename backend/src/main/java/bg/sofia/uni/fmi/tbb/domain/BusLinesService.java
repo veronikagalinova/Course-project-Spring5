@@ -1,6 +1,7 @@
 package bg.sofia.uni.fmi.tbb.domain;
 
 import bg.sofia.uni.fmi.tbb.dto.BusLineSearchResult;
+import bg.sofia.uni.fmi.tbb.exception.OutOfSeatsException;
 import bg.sofia.uni.fmi.tbb.model.BusLine;
 
 import javax.validation.Valid;
@@ -16,4 +17,5 @@ public interface BusLinesService {
     BusLine update(BusLine busLine);
     BusLine delete(String id);
     List<BusLineSearchResult> findRoute(String startPoint, String endPoint, DayOfWeek travelDay);
+    int findSeatForTravelerTicket(String busLineId) throws OutOfSeatsException;
 }

@@ -44,7 +44,7 @@
         <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef> Buy ticket</th>
             <td mat-cell *matCellDef="let element" class="action-link">
-                <button mat-button (click)="buyTicket(element)">
+                <button mat-button color="primary" (click)="buyTicket(element)">
                     <mat-icon>add_shopping_cart</mat-icon>
                 </button>
             </td>
