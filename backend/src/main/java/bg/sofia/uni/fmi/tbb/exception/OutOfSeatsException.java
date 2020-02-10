@@ -1,6 +1,6 @@
 package bg.sofia.uni.fmi.tbb.exception;
 
-public class OutOfSeatsException extends RuntimeException {
+public class OutOfSeatsException extends Exception {
     public OutOfSeatsException() {
     }
 

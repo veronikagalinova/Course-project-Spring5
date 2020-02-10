@@ -43,7 +43,7 @@ public class TicketsController {
 
     @PostMapping
     public ResponseEntity<Ticket> buyTicket(@RequestBody NewTicketRequest request,
-                                            Authentication authentication) {
+                                            Authentication authentication) throws OutOfSeatsException {
         Ticket ticket = createTicketForBuyRequest(request);
         ticket.setUserId(((User) authentication.getPrincipal()).getId());
         Ticket created = ticketsService.insert(ticket);
@@ -66,7 +66,7 @@ public class TicketsController {
         return ResponseEntity.ok(ticketsService.delete(id));
     }
 
-    private Ticket createTicketForBuyRequest(NewTicketRequest request) {
+    private Ticket createTicketForBuyRequest(NewTicketRequest request) throws OutOfSeatsException {
         Ticket ticket = new Ticket();
         ticket.setStartPoint(request.getRoute().getStartPoint());
         ticket.setEndPoint(request.getRoute().getEndPoint());

@@ -120,7 +120,7 @@ public class BusLinesServiceImpl implements BusLinesService {
         if (seat == 0) {
             throw new OutOfSeatsException(String.format("Bus line with id=%s is out of seats.", busLineId));
         }
-        busLine.setSeats(--seat);
+        busLine.setSeats(seat--);
         repository.save(busLine);
         return seat;
     }

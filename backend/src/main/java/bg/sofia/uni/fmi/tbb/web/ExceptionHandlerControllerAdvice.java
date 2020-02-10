@@ -2,6 +2,7 @@ package bg.sofia.uni.fmi.tbb.web;
 
 import bg.sofia.uni.fmi.tbb.exception.InvalidEntityException;
 import bg.sofia.uni.fmi.tbb.exception.NonexistingEntityException;
+import bg.sofia.uni.fmi.tbb.exception.OutOfSeatsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ public class ExceptionHandlerControllerAdvice {
 
     @ExceptionHandler({InvalidEntityException.class,
             ConstraintViolationException.class,
+            OutOfSeatsException.class,
             HttpMessageNotReadableException.class})
     public ResponseEntity<String> handle(Exception ex){
         log.error(ex.getMessage());
@@ -35,4 +37,5 @@ public class ExceptionHandlerControllerAdvice {
         log.error(ex.getMessage());
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ex.getMessage());
     }
+
 }
