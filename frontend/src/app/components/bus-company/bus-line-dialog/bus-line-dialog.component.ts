@@ -35,8 +35,10 @@ export class BusLineDialogComponent {
         startPoint: [this.busLine ? this.busLine.route.startPoint.location : '', Validators.required],
         endPoint: [this.busLine ? this.busLine.route.endPoint.location : '', Validators.required],
         distance: [this.busLine ? this.busLine.route.distance : '', [Validators.required, Validators.min(0)]],
-        duration: [this.busLine ? this.busLine.route.duration : '', [Validators.required, Validators.min(0)]],
-        price: [this.busLine ? this.busLine.price : '', [Validators.required, Validators.min(0)]],
+        duration: [this.busLine ? this.busLine.route.duration : '', [Validators.required, Validators.min(0),
+        Validators.pattern("^([0-9]+)(.[0-5]?|.[0-5][0-9]?)?$")]],
+        price: [this.busLine ? this.busLine.price : '', [Validators.required, Validators.min(0),
+        Validators.pattern("^[0-9]+(.[0-9]{0,2})?$")]],
         seats: [this.busLine ? this.busLine.seats : '', [Validators.required, Validators.min(0)]],
         workingDays: [this.busLine ? this.busLine.workingDays : '', Validators.required],
         departureTime: [this.busLine ? this.busLine.departureTime : '', Validators.required]
