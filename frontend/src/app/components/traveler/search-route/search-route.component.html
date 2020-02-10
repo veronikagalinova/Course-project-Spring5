@@ -1,5 +1,5 @@
-<div class="container">
-    <div fxLayout="row" fxLayoutAlign="center center" class="content">
+<div class="container" fxLayout="column" fxLayoutAlign="center center">
+    <div class="content">
         <mat-form-field>
             <mat-label>Start point</mat-label>
             <mat-select [(ngModel)]="startPoint">
@@ -34,7 +34,8 @@
     </ng-container>
 
     <ng-template #results>
-        <app-search-result [searchResult]="searchResults" (newTicketRequest)="buyTicket($event)"></app-search-result>
+        <app-search-result [searchResult]="searchResults" (newTicketRequest)="buyTicket($event)">
+        </app-search-result>
     </ng-template>
 
     <ng-template #noResults>

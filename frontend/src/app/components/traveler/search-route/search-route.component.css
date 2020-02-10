@@ -1,3 +1,10 @@
 mat-form-field {
     padding-right: 2em;
 }
+
+.content {
+    border: 5px solid rgb(103, 58, 183);
+    border-radius: 2em;
+    width: fit-content;
+    padding: 15px;
+}
