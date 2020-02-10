@@ -22,7 +22,6 @@ export class SearchRouteComponent implements OnInit {
   minTravelDate = new Date(Date.now());
   searchResults: BusLineSearchResult[];
   noResultsMsg = AppConstants.SEARCH_ROUTE_NO_RESULT;
-  ticketRequestExceptionMsg: string;
 
   constructor(private busLinesService: BusLinesService,
     public snackBar: MatSnackBar,
@@ -57,20 +56,21 @@ export class SearchRouteComponent implements OnInit {
 
   buyTicket(event) {
     const dateFormatted = this.formatDate();
-    this.ticketsService.buyTicket(event, dateFormatted).subscribe(res => this.showSuccessMsg(),
-      error => this.ticketRequestExceptionMsg = error.error);
+    this.ticketsService.buyTicket(event, dateFormatted).subscribe(res => {
+      this.showStatusMsg(AppConstants.BOUGHT_TICKET_SUCCESS_MSG, 'success-snack-bar');
+    },
+      error => this.showStatusMsg(error.error, 'error'));
   }
 
   formatDate(): string {
     return moment(this.travelDate.value).format('YYYY-MM-DD');
   }
 
-  showSuccessMsg() {
-    const successfullCreationMsg = `Successfully bought ticket. See details in 'My tickets'.`;
+  showStatusMsg(msg: string, styleClass: string) {
 
-    this.snackBar.open(successfullCreationMsg, '', {
+    this.snackBar.open(msg, '', {
       duration: 5000,
-      panelClass: ['success-snack-bar']
+      panelClass: [styleClass]
     });
   }
 
