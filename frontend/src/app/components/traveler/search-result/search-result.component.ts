@@ -27,7 +27,6 @@ export class SearchResultComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource.data = this.searchResult;
-    console.log(this.searchResult)
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }

@@ -27,6 +27,7 @@ import { BusLineDialogComponent } from './components/bus-company/bus-line-dialog
 import { MAT_DATE_LOCALE } from '@angular/material';
 import { StopsFilterPipe } from './pipes/stops.filter.pipe';
 import { SearchResultComponent } from './components/traveler/search-result/search-result.component';
+import { TicketComponent } from './components/traveler/ticket/ticket.component';
 
 export class CdkOverlayContainer extends OverlayContainer {
 
@@ -53,6 +54,7 @@ export class CdkOverlayContainer extends OverlayContainer {
     BusLineDialogComponent,
     StopsFilterPipe,
     SearchResultComponent,
+    TicketComponent,
   ],
   imports: [
     BrowserModule,

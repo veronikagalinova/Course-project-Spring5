@@ -18,7 +18,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.List;
 
 @RestController
@@ -32,8 +31,8 @@ public class TicketsController {
 
     @GetMapping
     @PostFilter("filterObject.userId == authentication.principal.id")
-    public ResponseEntity<List<Ticket>> getTickets() {
-        return ResponseEntity.ok(ticketsService.findAll());
+    public List<Ticket> getTickets() {
+        return ticketsService.findAll();
     }
 
     @GetMapping("{id}")

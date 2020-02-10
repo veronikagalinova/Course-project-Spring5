@@ -1,1 +1,7 @@
-<p>my-tickets works!</p>
+<div class="container">
+    <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start">
+        <ng-container *ngFor="let ticket of tickets">
+            <app-ticket [ticket]="ticket" fxFlex="0 1 calc(33.3% - 32px)"></app-ticket>
+        </ng-container>
+    </div>
+</div>

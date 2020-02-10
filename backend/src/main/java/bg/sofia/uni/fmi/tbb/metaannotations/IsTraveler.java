@@ -11,5 +11,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @PreAuthorize("hasRole('TRAVELER')")
-public @interface IsTravelerOrAdmin {
+public @interface IsTraveler {
 }
