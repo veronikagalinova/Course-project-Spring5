@@ -2,3 +2,15 @@ td.mat-cell,
 th.mat-header-cell {
     padding: 5px;
 }
+
+th,
+td {
+    overflow: hidden;
+    width: 100px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.content {
+    margin-top: 10px;
+}

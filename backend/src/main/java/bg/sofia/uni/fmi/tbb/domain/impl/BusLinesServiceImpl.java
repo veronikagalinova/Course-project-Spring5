@@ -118,7 +118,10 @@ public class BusLinesServiceImpl implements BusLinesService {
         BusLine busLine = busLineInDB.get();
         int seat = busLine.getSeats();
         if (seat == 0) {
-            throw new OutOfSeatsException(String.format("Bus line with id=%s is out of seats.", busLineId));
+            throw new OutOfSeatsException(String.format("Bus line %s-%s of company %s is out of seats.",
+                    busLine.getRoute().getStartPoint().getLocation(),
+                    busLine.getRoute().getEndPoint().getLocation(),
+                    busLine.getCompany()));
         }
         busLine.setSeats(seat--);
         repository.save(busLine);

@@ -22,6 +22,7 @@ export class SearchRouteComponent implements OnInit {
   minTravelDate = new Date(Date.now());
   searchResults: BusLineSearchResult[];
   noResultsMsg = AppConstants.SEARCH_ROUTE_NO_RESULT;
+  ticketRequestExceptionMsg: string;
 
   constructor(private busLinesService: BusLinesService,
     public snackBar: MatSnackBar,
@@ -56,7 +57,8 @@ export class SearchRouteComponent implements OnInit {
 
   buyTicket(event) {
     const dateFormatted = this.formatDate();
-    this.ticketsService.buyTicket(event, dateFormatted).subscribe(res => this.showSuccessMsg());
+    this.ticketsService.buyTicket(event, dateFormatted).subscribe(res => this.showSuccessMsg(),
+      error => this.ticketRequestExceptionMsg = error.error);
   }
 
   formatDate(): string {

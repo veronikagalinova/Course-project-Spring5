@@ -6,8 +6,8 @@ body {
 }
 
 .container {
-    padding: 6px;
-    margin: 6px;
+    padding: 10px;
+    margin: 10px;
 }
 
 body {
@@ -28,4 +28,11 @@ mat-card-content {
 
 .success-snack-bar {
     background-color: green !important;
+}
+
+.error {
+    margin-top: 5em;
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
 }
