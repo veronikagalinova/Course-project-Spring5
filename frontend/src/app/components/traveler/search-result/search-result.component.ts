@@ -17,7 +17,7 @@ export class SearchResultComponent implements OnInit {
   dataSource = new MatTableDataSource<BusLineSearchResult>();
 
   displayedColumns: string[] = ['startPoint', 'endPoint', 'company',
-    'departureTime', 'arrivalTime', 'price', 'duration', 'action'];
+    'departureTime', 'price', 'duration', 'action'];
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;

@@ -23,7 +23,8 @@ import {
   MatCardModule,
   MatMenuModule,
   MatDialogModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatSortModule
 } from '@angular/material';
 
 
@@ -51,7 +52,8 @@ import {
     MatPaginatorModule,
     MatMenuModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSortModule
   ],
   exports: [
     MatButtonModule,
@@ -74,7 +76,8 @@ import {
     MatPaginatorModule,
     MatMenuModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSortModule
   ],
   providers: [
     MatDatepickerModule,

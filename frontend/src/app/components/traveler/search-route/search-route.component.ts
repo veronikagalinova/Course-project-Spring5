@@ -50,7 +50,6 @@ export class SearchRouteComponent implements OnInit {
       this.busLinesService.searchRoute(this.startPoint, this.endPoint, dateFormatted)
         .subscribe(res => {
           this.searchResults = res;
-          console.log(this.searchResults)
         });
     }
   }
