@@ -58,8 +58,7 @@ export class SearchRouteComponent implements OnInit {
     const dateFormatted = this.formatDate();
     this.ticketsService.buyTicket(event, dateFormatted).subscribe(res => {
       this.showStatusMsg(AppConstants.BOUGHT_TICKET_SUCCESS_MSG, 'success-snack-bar');
-    },
-      error => this.showStatusMsg(error.error, 'error'));
+    });
   }
 
   formatDate(): string {
@@ -67,7 +66,6 @@ export class SearchRouteComponent implements OnInit {
   }
 
   showStatusMsg(msg: string, styleClass: string) {
-
     this.snackBar.open(msg, '', {
       duration: 5000,
       panelClass: [styleClass]

@@ -20,8 +20,13 @@ export class TicketComponent implements OnInit {
   }
 
   setTravelerName() {
-    this.authenticationService.currentUser.subscribe(currentUser =>
-      this.travelerName = `${currentUser.firstName} ${currentUser.lastName}`);
+    this.authenticationService.currentUser.subscribe(currentUser => {
+      if (currentUser) {
+        this.travelerName = `${currentUser.firstName} ${currentUser.lastName}`;
+      }
+
+    });
+
   }
 
 }
