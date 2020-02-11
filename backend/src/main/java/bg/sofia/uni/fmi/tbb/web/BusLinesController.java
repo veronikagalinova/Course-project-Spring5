@@ -3,7 +3,9 @@ package bg.sofia.uni.fmi.tbb.web;
 import bg.sofia.uni.fmi.tbb.domain.BusLinesService;
 import bg.sofia.uni.fmi.tbb.dto.BusLineSearchResult;
 import bg.sofia.uni.fmi.tbb.metaannotations.IsBusCompanyOrAdmin;
+import bg.sofia.uni.fmi.tbb.metaannotations.IsCurrentUserOrAdmin;
 import bg.sofia.uni.fmi.tbb.metaannotations.IsOwnerOrAdmin;
+import bg.sofia.uni.fmi.tbb.metaannotations.IsTraveler;
 import bg.sofia.uni.fmi.tbb.model.BusLine;
 import bg.sofia.uni.fmi.tbb.model.User;
 import lombok.extern.slf4j.Slf4j;
@@ -28,12 +30,13 @@ public class BusLinesController {
     private BusLinesService service;
 
     @GetMapping
-    @PostFilter("filterObject.companyId == authentication.principal.id")
+    @PostFilter("hasRole('ADMIN') or filterObject.companyId == authentication.principal.id")
     public List<BusLine> getBusLines() {
         return service.findAll();
     }
 
     @GetMapping("{id}")
+    @IsCurrentUserOrAdmin
     public BusLine getBusLineById(@PathVariable("id") String id) {
         return service.findById(id);
     }
@@ -75,6 +78,7 @@ public class BusLinesController {
     }
 
     @GetMapping("{startPoint}/{endPoint}/{travelDate}")
+    @IsTraveler
     public ResponseEntity<List<BusLineSearchResult>> searchRoute(@PathVariable String startPoint,
                                                                  @PathVariable String endPoint,
                                                                  @PathVariable

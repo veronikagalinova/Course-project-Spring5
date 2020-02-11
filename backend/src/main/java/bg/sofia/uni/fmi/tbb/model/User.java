@@ -43,7 +43,7 @@ public class User implements UserDetails {
     @NonNull
     private String username;
 
-    @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,16})")
+//    @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,16})")
     @NotNull
     @NonNull
     @JsonProperty(access = WRITE_ONLY)
@@ -86,6 +86,10 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return active;
+    }
+
+    public static List<String> getValidRoles() {
+        return Arrays.asList(ADMIN, BUS_COMPANY,TRAVELER);
     }
 
 }

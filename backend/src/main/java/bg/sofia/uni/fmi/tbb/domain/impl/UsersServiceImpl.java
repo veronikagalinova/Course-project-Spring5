@@ -18,6 +18,7 @@ import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import static bg.sofia.uni.fmi.tbb.model.User.TRAVELER;
 
 @Service
 @Slf4j
@@ -98,7 +99,7 @@ public class UsersServiceImpl implements UsersService {
 
     private void setRoles(User user) {
         if (user.getRoles() == null || user.getRoles().isEmpty()) {
-            user.setRoles(Arrays.asList("ROLE_TRAVELER"));
+            user.setRoles(Arrays.asList(TRAVELER));
         }
     }
 }

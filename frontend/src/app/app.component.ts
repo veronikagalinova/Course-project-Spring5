@@ -15,6 +15,7 @@ export class AppComponent {
     isAuthenticated: boolean;
     isBusCompany: boolean;
     isTraveler: boolean;
+    isAdmin: boolean;
 
     constructor(
         private router: Router,
@@ -25,6 +26,7 @@ export class AppComponent {
             this.isAuthenticated = this.currentUser != null;
             this.isBusCompany = this.currentUser && this.currentUser.roles.includes(Role.BUS_COMPANY);
             this.isTraveler = this.currentUser && this.currentUser.roles.includes(Role.TRAVELER);
+            this.isAdmin = this.currentUser && this.currentUser.roles.includes(Role.ADMIN);
         });
 
 

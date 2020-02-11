@@ -36,16 +36,16 @@ public class DataInitializer implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         if (usersService.getSize() == 0) {
-            User user = new User(null, "admin", "admin123&", "Admin", "Admin",
+            User user = new User(null, "admin", "Admin123", "Admin", "Admin",
                     Arrays.asList("ROLE_ADMIN"), true);
             log.info(">>>Created root admin user: {}", user);
             usersService.insert(user);
 
-            User traveler = new User("traveler", "traveler123&", "Veronika",
+            User traveler = new User("traveler", "Traveler123", "Veronika",
                     "Valentinova");
             usersService.insert(traveler);
 
-            User busCompany = new User("company", "company123&", "Express",
+            User busCompany = new User("company", "Company123", "Express",
                     "EOOD");
             busCompany.setRoles(Arrays.asList(User.BUS_COMPANY));
             busCompany = usersService.insert(busCompany);

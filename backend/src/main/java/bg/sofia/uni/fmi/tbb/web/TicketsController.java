@@ -4,6 +4,7 @@ import bg.sofia.uni.fmi.tbb.domain.BusLinesService;
 import bg.sofia.uni.fmi.tbb.domain.TicketsService;
 import bg.sofia.uni.fmi.tbb.dto.NewTicketRequest;
 import bg.sofia.uni.fmi.tbb.exception.OutOfSeatsException;
+import bg.sofia.uni.fmi.tbb.metaannotations.IsTraveler;
 import bg.sofia.uni.fmi.tbb.model.Ticket;
 import bg.sofia.uni.fmi.tbb.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ public class TicketsController {
     private BusLinesService busLinesService;
 
     @GetMapping
+    @IsTraveler
     @PostFilter("filterObject.userId == authentication.principal.id")
     public List<Ticket> getTickets() {
         return ticketsService.findAll();
@@ -41,6 +43,7 @@ public class TicketsController {
     }
 
     @PostMapping
+    @IsTraveler
     public ResponseEntity<Ticket> buyTicket(@RequestBody NewTicketRequest request,
                                             Authentication authentication) throws OutOfSeatsException {
         Ticket ticket = createTicketForBuyRequest(request);

@@ -22,10 +22,6 @@ mat-card-content {
     align-items: center;
 }
 
-.test {
-    z-index: 999!important;
-}
-
 .success-snack-bar {
     background-color: green !important;
 }

@@ -6,6 +6,7 @@ import bg.sofia.uni.fmi.tbb.dto.BusLineSearchResult;
 import bg.sofia.uni.fmi.tbb.exception.InvalidEntityException;
 import bg.sofia.uni.fmi.tbb.exception.NonexistingEntityException;
 import bg.sofia.uni.fmi.tbb.exception.OutOfSeatsException;
+import bg.sofia.uni.fmi.tbb.metaannotations.IsTraveler;
 import bg.sofia.uni.fmi.tbb.model.BusLine;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

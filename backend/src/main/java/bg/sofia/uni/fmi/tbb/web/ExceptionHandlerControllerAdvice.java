@@ -26,6 +26,7 @@ public class ExceptionHandlerControllerAdvice {
     @ExceptionHandler({InvalidEntityException.class,
             ConstraintViolationException.class,
             OutOfSeatsException.class,
+            IllegalArgumentException.class,
             HttpMessageNotReadableException.class})
     public ResponseEntity<String> handle(Exception ex){
         log.error(ex.getMessage());

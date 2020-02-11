@@ -1,0 +1,57 @@
+<div mat-dialog-content>
+    <mat-dialog-content *ngIf="action === 'Delete'; else elseTemplate">
+        {{WARNING_DELETE_MSG}}
+    </mat-dialog-content>
+    <ng-template #elseTemplate>
+        <mat-dialog-content [formGroup]="form" fxLayout="column">
+
+            <mat-form-field fxFlex>
+                <input matInput placeholder="Username" formControlName="username" [readonly]="action==='Update'">
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+                <input matInput placeholder="First name" formControlName="firstName">
+                <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                    <div *ngIf="f.lastName.errors.required">First Name is required</div>
+                </div>
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+                <input matInput placeholder="Last name" formControlName="lastName">
+                <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                    <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                </div>
+            </mat-form-field>
+
+            <mat-form-field fxFlex *ngIf="action==='Add'">
+                <input type="password" matInput placeholder="Password" formControlName="password">
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.pattern">Password must contain at least one number and one uppercase and lowercase letter and must contain 6-16 characters</div>
+                </div>
+            </mat-form-field>
+
+            <mat-form-field fxFlex *ngIf="action==='Add'">
+                <input type="password" matInput placeholder="Confirm password" formControlName="confirmPassword">
+                <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                    <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+                </div>
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+                <mat-label>Role</mat-label>
+                <mat-select formControlName="roles" multiple>
+                    <mat-option *ngFor="let role of roles" [value]="role">{{role}}
+                    </mat-option>
+                </mat-select>
+                <div *ngIf="submitted && f.roles.errors" class="invalid-feedback">
+                    <div *ngIf="f.roles.errors.required">Role is required</div>
+                </div>
+            </mat-form-field>
+
+        </mat-dialog-content>
+    </ng-template>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="close()" mat-flat-button color="warn">Cancel</button>
+    <button mat-button (click)="doAction()" [disabled]="form && !form.valid">{{action}}</button>
+</div>
