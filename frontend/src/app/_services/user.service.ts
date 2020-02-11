@@ -20,7 +20,7 @@ export class UserService {
         return this.http.post<User>(`${environment.apiUrl}/api/users`, user);
     }
 
-    updateProfile(user: User) {
-        return this.http.put<User>(`${environment.apiUrl}/api/users/${user.id}`, user);
+    updateProfile(id: string, user: User) {
+        return this.http.put<User>(`${environment.apiUrl}/api/users/${id}`, user);
     }
 }

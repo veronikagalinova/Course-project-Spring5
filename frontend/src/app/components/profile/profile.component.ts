@@ -37,11 +37,9 @@ export class ProfileComponent implements OnInit {
   initializeForm() {
     this.form = this.fb.group({
       username: [this.currentUser.username, Validators.required],
-      roles: [this.currentUser.roles],
-      id: [this.currentUser.id],
       firstName: [this.currentUser.firstName, Validators.required],
       lastName: [this.currentUser.lastName, Validators.required],
-      password: ['', [Validators.minLength(6)]],
+      password: ['', [Validators.pattern("(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}")]],
       confirmPassword: [''],
     }, {
       validator: MustMatch('password', 'confirmPassword')
@@ -57,7 +55,15 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    this.usersService.updateProfile(this.form.value).subscribe(res => {
+    const userUpdated = new User();
+    userUpdated.username = this.f.username.value;
+    userUpdated.firstName = this.f.firstName.value;
+    userUpdated.lastName = this.f.lastName.value;
+    if (this.f.password.value !== "") {
+      userUpdated.password = this.f.password.value;
+    }
+
+    this.usersService.updateProfile(this.currentUser.id, userUpdated).subscribe(res => {
       this.currentUser = res;
       this.autenticationService.updateCurrentUserValue(res);
       this.submitted = false;

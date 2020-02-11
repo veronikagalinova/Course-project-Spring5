@@ -6,9 +6,6 @@
                 <input matInput placeholder="Username" formControlName="username" readonly>
             </mat-form-field>
 
-            <input type="hidden" formControlName="id">
-            <input type="hidden" formControlName="roles">
-
             <mat-form-field fxFlex>
                 <input matInput placeholder="First name" formControlName="firstName">
                 <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
@@ -24,9 +21,9 @@
             </mat-form-field>
 
             <mat-form-field fxFlex>
-                <input type="password" matInput placeholder="New password" formControlName="password">
+                <input type="password" matInput placeholder="New password" formControlName="password" ng-pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}">
                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                    <div *ngIf="f.password.errors.pattern">Password must contain at least one number and one uppercase and lowercase letter, and at least 6 characters</div>
                 </div>
             </mat-form-field>
 
