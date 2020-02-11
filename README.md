@@ -34,4 +34,4 @@ The main user roles are:
 
 
 ## Detailed description:
-- in Tbb presentation
+- in Tbb documentation
