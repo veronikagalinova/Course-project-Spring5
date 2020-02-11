@@ -1,1 +1,51 @@
-<p>profile works!</p>
+<mat-card *ngIf="currentUser" style="max-width: 400px;margin: 2em auto;text-align: center;">
+    <mat-card-title>Profile information</mat-card-title>
+    <form fxLayout="column" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-card-content>
+            <mat-form-field fxFlex>
+                <input matInput placeholder="Username" formControlName="username" readonly>
+            </mat-form-field>
+
+            <input type="hidden" formControlName="id">
+            <input type="hidden" formControlName="roles">
+
+            <mat-form-field fxFlex>
+                <input matInput placeholder="First name" formControlName="firstName">
+                <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                    <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                </div>
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+                <input matInput placeholder="Last name" formControlName="lastName">
+                <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                    <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                </div>
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+                <input type="password" matInput placeholder="New password" formControlName="password">
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                </div>
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+                <input type="password" matInput placeholder="Confirm new password" formControlName="confirmPassword">
+                <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                    <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                    <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+                </div>
+            </mat-form-field>
+
+
+
+            <button type="submit" mat-button color="primary">Update</button>
+        </mat-card-content>
+    </form>
+
+    <div>
+
+    </div>
+</mat-card>

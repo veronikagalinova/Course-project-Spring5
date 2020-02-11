@@ -25,7 +25,7 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { GlobalErrorHandler } from './_helpers/error.handler';
 import { BusLineDialogComponent } from './components/bus-company/bus-line-dialog/bus-line-dialog.component';
 import { MAT_DATE_LOCALE } from '@angular/material';
-import { StopsFilterPipe } from './pipes/stops.filter.pipe';
+import { StopsFilterPipe } from './_pipes/stops.filter.pipe';
 import { SearchResultComponent } from './components/traveler/search-result/search-result.component';
 import { TicketComponent } from './components/traveler/ticket/ticket.component';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
@@ -75,7 +75,6 @@ export class CdkOverlayContainer extends OverlayContainer {
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: OverlayContainer, useClass: CdkOverlayContainer },
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
   ],
   bootstrap: [AppComponent],

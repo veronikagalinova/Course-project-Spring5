@@ -68,7 +68,12 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public User update(User user) {
+        PasswordEncoder passwordEncoder =
+                PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setActive(true);
         setRoles(user);
+        log.debug(">>>Update user: " + user);
         return repository.save(user);
     }
 

@@ -27,7 +27,7 @@ import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
 @RequiredArgsConstructor
 @JsonIgnoreProperties(value = {"authorities", "accountNonExpired",
         "accountNonLocked",
-        "credentialsNonExpired", "enabled"})
+        "credentialsNonExpired", "enabled", "active"})
 public class User implements UserDetails {
 
     public static final String ADMIN = "ROLE_ADMIN";

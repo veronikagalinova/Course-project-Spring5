@@ -17,7 +17,10 @@ export class UserService {
     }
 
     register(user: User) {
-        console.log(user)
         return this.http.post<User>(`${environment.apiUrl}/api/users`, user);
+    }
+
+    updateProfile(user: User) {
+        return this.http.put<User>(`${environment.apiUrl}/api/users/${user.id}`, user);
     }
 }
