@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
  */
 @Document(collection = "stops")
 @Data
+@Getter
 @NoArgsConstructor
 @RequiredArgsConstructor
 public class Stop {

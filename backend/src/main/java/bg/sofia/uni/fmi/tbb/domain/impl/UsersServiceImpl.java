@@ -69,7 +69,7 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public User update(User user) {
-        if (!StringUtils.isEmpty(user.getPassword().trim())) {
+        if (user.getPassword() != null && !StringUtils.isEmpty(user.getPassword().trim())) {
             PasswordEncoder passwordEncoder =
                     PasswordEncoderFactories.createDelegatingPasswordEncoder();
             user.setPassword(passwordEncoder.encode(user.getPassword()));

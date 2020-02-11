@@ -37,9 +37,10 @@ export class ProfileComponent implements OnInit {
   initializeForm() {
     this.form = this.fb.group({
       username: [this.currentUser.username, Validators.required],
+      roles: [this.currentUser.roles],
       firstName: [this.currentUser.firstName, Validators.required],
       lastName: [this.currentUser.lastName, Validators.required],
-      password: ['', [Validators.pattern("(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}")]],
+      password: ['', [Validators.pattern("(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}")]],
       confirmPassword: [''],
     }, {
       validator: MustMatch('password', 'confirmPassword')
@@ -59,6 +60,7 @@ export class ProfileComponent implements OnInit {
     userUpdated.username = this.f.username.value;
     userUpdated.firstName = this.f.firstName.value;
     userUpdated.lastName = this.f.lastName.value;
+    userUpdated.roles = this.currentUser.roles;
     if (this.f.password.value !== "") {
       userUpdated.password = this.f.password.value;
     }

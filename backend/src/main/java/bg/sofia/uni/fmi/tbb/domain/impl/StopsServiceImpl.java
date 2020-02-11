@@ -37,12 +37,12 @@ public class StopsServiceImpl implements StopsService {
 
     @Override
     public Stop insert(Stop stop) {
-        return null;
+        return repository.insert(stop);
     }
 
     @Override
     public Stop update(Stop stop) {
-        return repository.insert(stop);
+        return repository.save(stop);
     }
 
     @Override

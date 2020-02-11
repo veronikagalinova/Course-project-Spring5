@@ -13,8 +13,10 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.spec.PSource;
 import java.time.DayOfWeek;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,13 +57,13 @@ public class DataInitializer implements ApplicationRunner {
 
     private void insertBusLinesForCompany(User busCompany,
                                           List<Stop> stops) {
-        Stop sofia = stops.get(0);
-        Stop varna = stops.get(2);
+        Stop sofia = stops.get(7);
+        Stop plovdiv = stops.get(3);
         List<DayOfWeek> workingDays = Arrays.asList(DayOfWeek.MONDAY,
                 DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY,
                 DayOfWeek.FRIDAY, DayOfWeek.SATURDAY, DayOfWeek.SUNDAY);
-        BusLine sofiaVarna = new BusLine(new Route(sofia, varna, 300, 5.5),
-                30.0, 30, workingDays, "09:00");
+        BusLine sofiaVarna = new BusLine(new Route(sofia, plovdiv, 120, 1.30),
+                10.0, 20, workingDays, "09:00");
         sofiaVarna.setCompany(busCompany.getFirstName());
         sofiaVarna.setCompanyId(busCompany.getId());
         busLinesService.create(sofiaVarna);
@@ -72,7 +74,10 @@ public class DataInitializer implements ApplicationRunner {
                 "Bourgas", "Pleven", "Lovech", "Plovdiv", "Veliko Tarnovo",
                 "Sliven", "Yambol", "Razlog", "Ruse");
         List<Stop> stops =
-                locations.stream().sorted().map(Stop::new).collect(Collectors.toList());
+                locations.stream()
+                        .map(Stop::new)
+                        .sorted(Comparator.comparing(Stop::getLocation))
+                        .collect(Collectors.toList());
         stops.forEach(stop -> stopsService.insert(stop));
         return stops;
     }

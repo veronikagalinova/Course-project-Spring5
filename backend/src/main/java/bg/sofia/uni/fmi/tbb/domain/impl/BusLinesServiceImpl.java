@@ -123,7 +123,8 @@ public class BusLinesServiceImpl implements BusLinesService {
                     busLine.getRoute().getEndPoint().getLocation(),
                     busLine.getCompany()));
         }
-        busLine.setSeats(seat--);
+        seat--;
+        busLine.setSeats(seat);
         repository.save(busLine);
         return seat;
     }

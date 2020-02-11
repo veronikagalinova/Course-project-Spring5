@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { UserService } from '../_services/user.service';
 import { User } from '../_models/User';
+import { MustMatch } from '@app/MustMatchValidatior';
 
 @Component({
   selector: 'app-register',
@@ -30,8 +31,11 @@ export class RegisterComponent implements OnInit {
       username: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      password: ['', Validators.required],
       role: ['', Validators.required],
+      password: ['', [Validators.pattern("(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}")]],
+      confirmPassword: [''],
+    }, {
+      validator: MustMatch('password', 'confirmPassword')
     });
 
     // get return url from route parameters or default to '/'

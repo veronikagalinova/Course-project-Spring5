@@ -4,18 +4,37 @@
         <mat-card-content>
             <mat-form-field fxFlex>
                 <input matInput placeholder="Username" formControlName="username">
+                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                    <div *ngIf="f.username.errors.required">Username is required</div>
+                </div>
             </mat-form-field>
 
             <mat-form-field fxFlex>
                 <input matInput placeholder="First name" formControlName="firstName">
+                <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                    <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                </div>
             </mat-form-field>
 
             <mat-form-field fxFlex>
                 <input matInput placeholder="Last name" formControlName="lastName">
+                <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                    <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                </div>
             </mat-form-field>
 
             <mat-form-field fxFlex>
                 <input type="password" matInput placeholder="Password" formControlName="password">
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.pattern">Password must contain at least one number and one uppercase and lowercase letter and must contain 6-16 characters</div>
+                </div>
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+                <input type="password" matInput placeholder="Confirm password" formControlName="confirmPassword">
+                <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                    <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+                </div>
             </mat-form-field>
 
             <mat-form-field fxFlex>
@@ -24,6 +43,9 @@
                     <mat-option *ngFor="let role of roles" [value]="role">{{role}}
                     </mat-option>
                 </mat-select>
+                <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+                    <div *ngIf="f.role.errors.required">Role is required</div>
+                </div>
             </mat-form-field>
 
             <p *ngIf="error">{{error}}</p>

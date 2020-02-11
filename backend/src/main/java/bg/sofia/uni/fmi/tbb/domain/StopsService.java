@@ -8,7 +8,7 @@ public interface StopsService {
     List<Stop> findAll();
     Stop findById(String id);
     Stop findByLocation(String location);
-    Stop insert(Stop user);
-    Stop update(Stop user);
+    Stop insert(Stop stop);
+    Stop update(Stop stop);
     Stop delete(String id);
 }

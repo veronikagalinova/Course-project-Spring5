@@ -110,7 +110,7 @@ public class TicketsController {
         LocalDateTime arrival =
                 departure.plusHours(Long.parseLong(duration.substring(0,
                         indexOfDecimal)));
-        arrival.plusMinutes(Long.parseLong(duration.substring(indexOfDecimal + 1)));
+        arrival = arrival.plusMinutes(Long.parseLong(duration.substring(indexOfDecimal + 1)));
         return arrival;
     }
 }

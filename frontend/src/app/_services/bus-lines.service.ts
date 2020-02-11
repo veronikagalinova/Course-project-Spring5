@@ -19,7 +19,7 @@ export class BusLinesService {
   }
 
   getStops(): Observable<Stop[]> {
-    return this.http.get<Stop[]>('http://localhost:4200/assets/stops.json');
+    return this.http.get<Stop[]>(`${environment.apiUrl}/api/stops`);
   }
 
   addBusLine(newLine: BusLine): Observable<BusLine> {
