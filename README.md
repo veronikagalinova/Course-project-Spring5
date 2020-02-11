@@ -8,6 +8,10 @@
 - NodeJS v12.14.0, Angular 8
 - MongoDB 4.2
 - Gradle 6.0.1
+  - https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html
+  - https://docs.mongodb.com/manual/administration/install-community/
+  - https://angular.io/guide/setup-local
+
 
 ## Functional summary:
 Travel by bus (TBB) is online system for browsing and buying bus tickets. It supports different roles – Traveler, Bus Company and Admin. The system provides ability for travelers to search the best route, and for bus companies to manage their lines. In addition to that it allows users to register, and administrators to manage them.
@@ -21,7 +25,7 @@ The main user roles are:
   * Buy ticket
   * View list of all bought tickets
 * Administrator
-  * Manages users
+  * Manages users and bus lines
 *	Bus Company 
     * Create new bus lines with information for start point, end point, price, distance, duration, departure time, arrival time, number of seats
     * Edit/Delete bus line
@@ -30,4 +34,4 @@ The main user roles are:
 
 
 ## Detailed description:
-- in Tbb presentation
+- in Tbb documentation
