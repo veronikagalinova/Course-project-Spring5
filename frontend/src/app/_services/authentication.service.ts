@@ -20,7 +20,9 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    public set currentUserValue(user: User) {
+    public updateCurrentUserValue(user: User) {
+        user.jwttoken = this.currentUserSubject.value.jwttoken;
+        localStorage.setItem('currentUser', JSON.stringify(user));
         this.currentUserSubject.next(user);
     }
 

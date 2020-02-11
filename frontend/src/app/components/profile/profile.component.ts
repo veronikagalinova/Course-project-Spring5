@@ -4,6 +4,8 @@ import { User } from '@app/_models/User';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MustMatch } from '@app/MustMatchValidatior';
 import { UserService } from '@app/_services/user.service';
+import { AppConstants } from '@app/app.constants';
+import { NotificationService } from '@app/_services/error/notification.service';
 
 @Component({
   selector: 'app-profile',
@@ -17,6 +19,7 @@ export class ProfileComponent implements OnInit {
   submitted: boolean;
 
   constructor(private autenticationService: AuthenticationService,
+    private notificationService: NotificationService,
     private usersService: UserService,
     private fb: FormBuilder) { }
 
@@ -38,8 +41,8 @@ export class ProfileComponent implements OnInit {
       id: [this.currentUser.id],
       firstName: [this.currentUser.firstName, Validators.required],
       lastName: [this.currentUser.lastName, Validators.required],
-      password: ['', [Validators.minLength(6), Validators.required]],
-      confirmPassword: ['', Validators.required],
+      password: ['', [Validators.minLength(6)]],
+      confirmPassword: [''],
     }, {
       validator: MustMatch('password', 'confirmPassword')
     });
@@ -54,13 +57,14 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    const updateUser = this.form.value;
-    console.log(updateUser)
-    this.usersService.updateProfile(updateUser).subscribe(res => {
-      console.log(res)
+    this.usersService.updateProfile(this.form.value).subscribe(res => {
       this.currentUser = res;
+      this.autenticationService.updateCurrentUserValue(res);
+      this.submitted = false;
+      this.notificationService.showSuccess(AppConstants.PROFILE_UPDATE_SUCCESS_MSG);
     });
 
   }
+
 
 }

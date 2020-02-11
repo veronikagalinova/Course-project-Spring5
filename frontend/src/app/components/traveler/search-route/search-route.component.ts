@@ -7,6 +7,7 @@ import { BusLineSearchResult } from '../../../_models/BusLineSearchResult';
 import { AppConstants } from '../../../app.constants';
 import { TicketsService } from '../../../_services/tickets.service';
 import { MatSnackBar } from '@angular/material';
+import { NotificationService } from '@app/_services/error/notification.service';
 
 @Component({
   selector: 'app-search-route',
@@ -24,7 +25,7 @@ export class SearchRouteComponent implements OnInit {
   noResultsMsg = AppConstants.SEARCH_ROUTE_NO_RESULT;
 
   constructor(private busLinesService: BusLinesService,
-    public snackBar: MatSnackBar,
+    private notificationService: NotificationService,
     private ticketsService: TicketsService) { }
 
   ngOnInit() {
@@ -57,19 +58,12 @@ export class SearchRouteComponent implements OnInit {
   buyTicket(event) {
     const dateFormatted = this.formatDate();
     this.ticketsService.buyTicket(event, dateFormatted).subscribe(res => {
-      this.showStatusMsg(AppConstants.BOUGHT_TICKET_SUCCESS_MSG, 'success-snack-bar');
+      this.notificationService.showSuccess(AppConstants.BOUGHT_TICKET_SUCCESS_MSG);
     });
   }
 
   formatDate(): string {
     return moment(this.travelDate.value).format('YYYY-MM-DD');
-  }
-
-  showStatusMsg(msg: string, styleClass: string) {
-    this.snackBar.open(msg, '', {
-      duration: 5000,
-      panelClass: [styleClass]
-    });
   }
 
 }

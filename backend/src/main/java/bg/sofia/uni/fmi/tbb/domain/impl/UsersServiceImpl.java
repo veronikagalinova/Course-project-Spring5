@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.validation.Valid;
 import java.util.Arrays;
@@ -68,9 +69,11 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public User update(User user) {
-        PasswordEncoder passwordEncoder =
-                PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if (!StringUtils.isEmpty(user.getPassword().trim())) {
+            PasswordEncoder passwordEncoder =
+                    PasswordEncoderFactories.createDelegatingPasswordEncoder();
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         user.setActive(true);
         setRoles(user);
         log.debug(">>>Update user: " + user);

@@ -26,7 +26,6 @@
             <mat-form-field fxFlex>
                 <input type="password" matInput placeholder="New password" formControlName="password">
                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                    <div *ngIf="f.password.errors.required">Password is required</div>
                     <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
                 </div>
             </mat-form-field>
@@ -34,7 +33,6 @@
             <mat-form-field fxFlex>
                 <input type="password" matInput placeholder="Confirm new password" formControlName="confirmPassword">
                 <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-                    <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
                     <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
                 </div>
             </mat-form-field>
@@ -44,8 +42,4 @@
             <button type="submit" mat-button color="primary">Update</button>
         </mat-card-content>
     </form>
-
-    <div>
-
-    </div>
 </mat-card>
