@@ -25,7 +25,7 @@ The main user roles are:
   * Buy ticket
   * View list of all bought tickets
 * Administrator
-  * Manages users
+  * Manages users and bus lines
 *	Bus Company 
     * Create new bus lines with information for start point, end point, price, distance, duration, departure time, arrival time, number of seats
     * Edit/Delete bus line
