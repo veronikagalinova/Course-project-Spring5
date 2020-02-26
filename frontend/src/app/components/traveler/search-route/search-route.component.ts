@@ -42,13 +42,11 @@ export class SearchRouteComponent implements OnInit {
   search() {
     if (!this.startPoint || !this.endPoint || !this.travelDate.value) {
       // TO DO - SHOW ERROR MSG
-      console.log('***********')
     } else {
       const dateFormatted = this.formatDate();
       this.busLinesService.searchRoute(this.startPoint, this.endPoint, dateFormatted)
         .subscribe(res => {
           this.searchResults = res;
-          console.log(res);
         });
     }
   }

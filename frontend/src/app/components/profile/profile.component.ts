@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { AuthenticationService } from '@app/_services/authentication.service';
 import { User } from '@app/_models/User';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -40,7 +40,7 @@ export class ProfileComponent implements OnInit {
       roles: [this.currentUser.roles],
       firstName: [this.currentUser.firstName, Validators.required],
       lastName: [this.currentUser.lastName, Validators.required],
-      password: ['', [Validators.pattern("(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}")]],
+      password: ['', [Validators.pattern(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}/)]],
       confirmPassword: [''],
     }, {
       validator: MustMatch('password', 'confirmPassword')
@@ -57,6 +57,7 @@ export class ProfileComponent implements OnInit {
     }
 
     const userUpdated = new User();
+    userUpdated.id = this.currentUser.id;
     userUpdated.username = this.f.username.value;
     userUpdated.firstName = this.f.firstName.value;
     userUpdated.lastName = this.f.lastName.value;
