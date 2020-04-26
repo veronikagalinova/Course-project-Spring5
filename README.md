@@ -7,6 +7,7 @@
 - jjwt 0.9.1
 - NodeJS v12.14.0, Angular 8
 - MongoDB 4.2
+- Docker&Docker-compose
 - Gradle 6.0.1
   - https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html
   - https://docs.mongodb.com/manual/administration/install-community/
