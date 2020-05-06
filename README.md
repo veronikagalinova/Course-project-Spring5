@@ -1,38 +1,29 @@
-# Final project for FMI Course Spring v5 
-[https://github.com/iproduct/course-spring5/wiki]
+## Update from 05-2020
+Deploy the project to AWS for FMI course;
+- Final project for FMI Course Spring v5: in branch course-project-spring5
 
+### Spring Boot with AWS DocumentDB
 
-## Technologies used:
-- Java 1.8, Spring Boot 2.2
-- jjwt 0.9.1
-- NodeJS v12.14.0, Angular 8
-- MongoDB 4.2
-- Docker&Docker-compose
-- Gradle 6.0.1
-  - https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html
-  - https://docs.mongodb.com/manual/administration/install-community/
-  - https://angular.io/guide/setup-local
+AWS Document DB integration with spring data mongodb repository:
 
+Update mongo uri specified by AWS DocumentDB cluster in <i>application.properties</i> file or pass it as an environment variable to point to cluster endpoint
 
-## Functional summary:
-Travel by bus (TBB) is online system for browsing and buying bus tickets. It supports different roles – Traveler, Bus Company and Admin. The system provides ability for travelers to search the best route, and for bus companies to manage their lines. In addition to that it allows users to register, and administrators to manage them.
+```
+spring.data.mongodb.uri=${MONGO_URI}
+```
 
-The system is developed using Spring 5 Application Development Framework. The frontend uses Angular 8 to make Single Page Application (SPA).  The backend is implemented as a REST/JSON API using JSON data serialization. Routing is done client-side. JWT is used for authorization.
-The main user roles are:
-* Traveler
-  * Search route by start point, end point and travel date
-(and optionally return date)
-  * Filter results by different criteria – duration, price, distance
-  * Buy ticket
-  * View list of all bought tickets
-* Administrator
-  * Manages users and bus lines
-*	Bus Company 
-    * Create new bus lines with information for start point, end point, price, distance, duration, departure time, arrival time, number of seats
-    * Edit/Delete bus line
-* All users 
-  * Edit profile data – password, first name, last name
+#### SSL setup for AWS DocumentDB: 
 
+To connect through SSL, set below environment variable pointing to location of the certificate [https://s3.amazonaws.com/rds-downloads/rds-ca-2019-root.pem]. Alternatively this can be copied to the base directory.
 
-## Detailed description:
-- in Tbb documentation
+```
+java -jar app.jar -DsslCertificate=<<PATH TO SSL CERTIFICATE>>
+```
+
+A trust store is created in the main application class with the CA certificate contained in the file.
+
+- Run using java command 
+
+```
+java -jar app.jar -DsslCertificate=/home/ec2-user/rds-ca-2019-root.pem -DSPRING_DATA_MONGO_URI=mongodb://<<cluster endpoint>>
+```
